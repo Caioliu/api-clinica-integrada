@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\WebApi\\WebApi.csproj": {}
+    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj": {
+    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj",
+        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\caioa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\obj\\",
+        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\caioa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj"
+              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj"
               }
             }
           }
@@ -58,7 +58,19 @@
               "target": "Package",
               "version": "[11.10.0, )"
             },
+            "Gridify": {
+              "target": "Package",
+              "version": "[2.14.2, )"
+            },
+            "Gridify.EntityFramework": {
+              "target": "Package",
+              "version": "[2.14.2, )"
+            },
             "MediatR": {
+              "target": "Package",
+              "version": "[11.1.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.1.0, )"
             },
@@ -87,14 +99,14 @@
         }
       }
     },
-    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj": {
+    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\caioa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\caioa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -154,14 +166,14 @@
         }
       }
     },
-    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\caioa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\caioa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -179,11 +191,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj"
+              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj"
               },
-              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj"
+              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj"
               }
             }
           }
@@ -203,10 +215,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "MediatR.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.1.0, )"
-            },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -260,14 +268,14 @@
         }
       }
     },
-    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\WebApi\\WebApi.csproj": {
+    "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\WebApi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\WebApi\\WebApi.csproj",
+        "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\WebApi\\WebApi.csproj",
         "packagesPath": "C:\\Users\\caioa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\WebApi\\obj\\",
+        "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\caioa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -285,11 +293,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj"
+              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj"
               },
-              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -309,6 +317,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.8, )"

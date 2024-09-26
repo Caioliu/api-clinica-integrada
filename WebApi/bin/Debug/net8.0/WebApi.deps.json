@@ -9,6 +9,7 @@
       "WebApi/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
+          "AutoMapper": "13.0.1",
           "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.8",
           "Microsoft.EntityFrameworkCore.Design": "8.0.8",
@@ -46,6 +47,29 @@
           "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.10.0.0"
+          }
+        }
+      },
+      "Gridify/2.14.2": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Gridify.dll": {
+            "assemblyVersion": "2.14.2.0",
+            "fileVersion": "2.14.2.0"
+          }
+        }
+      },
+      "Gridify.EntityFramework/2.14.2": {
+        "dependencies": {
+          "Gridify": "2.14.2",
+          "Microsoft.EntityFrameworkCore": "8.0.8"
+        },
+        "runtime": {
+          "lib/net8.0/Gridify.EntityFramework.dll": {
+            "assemblyVersion": "2.14.2.0",
+            "fileVersion": "2.14.2.0"
           }
         }
       },
@@ -920,7 +944,10 @@
           "AutoMapper": "13.0.1",
           "Domain": "1.0.0",
           "FluentValidation.DependencyInjectionExtensions": "11.10.0",
+          "Gridify": "2.14.2",
+          "Gridify.EntityFramework": "2.14.2",
           "MediatR": "11.1.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.EntityFrameworkCore": "8.0.8"
         },
         "runtime": {
@@ -945,7 +972,6 @@
         "dependencies": {
           "Application": "1.0.0",
           "Domain": "1.0.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
@@ -987,6 +1013,20 @@
       "sha512": "sha512-hIe+i6P+ZUxFh6lJOBXRs4EGE/thcub0Lpdk2FF2/JBKJUqDqE2xDnBIiqTMkpXLoekgBN0SlhJT0vpeNr1J6g==",
       "path": "fluentvalidation.dependencyinjectionextensions/11.10.0",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.11.10.0.nupkg.sha512"
+    },
+    "Gridify/2.14.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hqP/0z5YdT6RBe0S6aE/Y6GoKOr9j/Mt7Gvh6v4SNH1BmBlUV2OA0WH7DXhcomePfz1X1XlrS/akaxXZWDy8iQ==",
+      "path": "gridify/2.14.2",
+      "hashPath": "gridify.2.14.2.nupkg.sha512"
+    },
+    "Gridify.EntityFramework/2.14.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7miVPC0SgWNudcXBtJe8ivimP6x560kS/rVYEBljfJS9k7j5C1cJlQPhw15uylLZjb/VL8XVFGHS+yf1kL/fIw==",
+      "path": "gridify.entityframework/2.14.2",
+      "hashPath": "gridify.entityframework.2.14.2.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",

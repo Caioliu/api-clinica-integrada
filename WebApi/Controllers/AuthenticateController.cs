@@ -11,7 +11,7 @@ using WebApi.ViewModels;
 
 namespace WebApi.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/authenticate")]
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
@@ -45,24 +45,6 @@ namespace WebApi.Controllers
                 return BadRequest("Tentativa login inválida.");
             }
         }
-
-        [HttpGet("TestarLogin")]
-        [Authorize(Roles = "atendente")]
-        public ActionResult TestarLogin() {
-            return Ok("Login OK");
-        }
-
-
-
-        //public async Task<IActionResult> Logout()
-        //{
-        //    await _autenticacao.Logout();
-        //    if (HttpContext.Session.GetString("SessionUsuarioId") is null)
-        //    {
-        //        TempData["sessao"] = "A Sessão expirou por inatividade. Efetue o login novamente.";
-        //    }
-        //    return RedirectToAction("Login", "Account");
-        //}
 
         private UsuarioToken GeraToken(AutenticacaoViewModel autenticacaoViewModel, string perfil) {
             //define declarações do usuário

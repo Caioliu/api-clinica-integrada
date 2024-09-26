@@ -48,6 +48,31 @@
           }
         }
       },
+      "Gridify/2.14.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "[8.0.0, 9.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/Gridify.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Gridify.dll": {}
+        }
+      },
+      "Gridify.EntityFramework/2.14.2": {
+        "type": "package",
+        "dependencies": {
+          "Gridify": "2.14.2",
+          "Microsoft.EntityFrameworkCore": "[8.0.0, 9.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/Gridify.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Gridify.EntityFramework.dll": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1542,7 +1567,10 @@
           "AutoMapper": "13.0.1",
           "Domain": "1.0.0",
           "FluentValidation.DependencyInjectionExtensions": "11.10.0",
+          "Gridify": "2.14.2",
+          "Gridify.EntityFramework": "2.14.2",
           "MediatR": "11.1.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.EntityFrameworkCore": "8.0.8"
         },
         "compile": {
@@ -1623,6 +1651,40 @@
         "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.xml",
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll",
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
+      ]
+    },
+    "Gridify/2.14.2": {
+      "sha512": "hqP/0z5YdT6RBe0S6aE/Y6GoKOr9j/Mt7Gvh6v4SNH1BmBlUV2OA0WH7DXhcomePfz1X1XlrS/akaxXZWDy8iQ==",
+      "type": "package",
+      "path": "gridify/2.14.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "gridify.2.14.2.nupkg.sha512",
+        "gridify.nuspec",
+        "lib/net6.0/Gridify.dll",
+        "lib/net7.0/Gridify.dll",
+        "lib/net8.0/Gridify.dll",
+        "lib/netstandard2.0/Gridify.dll",
+        "lib/netstandard2.1/Gridify.dll"
+      ]
+    },
+    "Gridify.EntityFramework/2.14.2": {
+      "sha512": "7miVPC0SgWNudcXBtJe8ivimP6x560kS/rVYEBljfJS9k7j5C1cJlQPhw15uylLZjb/VL8XVFGHS+yf1kL/fIw==",
+      "type": "package",
+      "path": "gridify.entityframework/2.14.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "gridify.entityframework.2.14.2.nupkg.sha512",
+        "gridify.entityframework.nuspec",
+        "lib/net6.0/Gridify.EntityFramework.dll",
+        "lib/net7.0/Gridify.EntityFramework.dll",
+        "lib/net8.0/Gridify.EntityFramework.dll",
+        "lib/netstandard2.0/Gridify.EntityFramework.dll",
+        "lib/netstandard2.1/Gridify.EntityFramework.dll"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -3749,7 +3811,6 @@
     "net8.0": [
       "Application >= 1.0.0",
       "Domain >= 1.0.0",
-      "MediatR.Extensions.Microsoft.DependencyInjection >= 11.1.0",
       "Microsoft.AspNetCore.Http.Abstractions >= 2.2.0",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.8",
@@ -3765,11 +3826,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\caioa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\caioa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3787,11 +3848,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj"
+            "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj"
             },
-            "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj"
+            "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj"
             }
           }
         }
@@ -3811,10 +3872,6 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "MediatR.Extensions.Microsoft.DependencyInjection": {
-            "target": "Package",
-            "version": "[11.1.0, )"
-          },
           "Microsoft.AspNetCore.Http.Abstractions": {
             "target": "Package",
             "version": "[2.2.0, )"

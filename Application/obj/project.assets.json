@@ -48,6 +48,31 @@
           }
         }
       },
+      "Gridify/2.14.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "[8.0.0, 9.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/Gridify.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Gridify.dll": {}
+        }
+      },
+      "Gridify.EntityFramework/2.14.2": {
+        "type": "package",
+        "dependencies": {
+          "Gridify": "2.14.2",
+          "Microsoft.EntityFrameworkCore": "[8.0.0, 9.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/Gridify.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Gridify.EntityFramework.dll": {}
+        }
+      },
       "MediatR/11.1.0": {
         "type": "package",
         "dependencies": {
@@ -75,6 +100,19 @@
           "lib/netstandard2.0/MediatR.Contracts.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "MediatR.Extensions.Microsoft.DependencyInjection/11.1.0": {
+        "type": "package",
+        "dependencies": {
+          "MediatR": "[11.0.0, 12.0.0)",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/8.0.8": {
@@ -465,6 +503,40 @@
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
       ]
     },
+    "Gridify/2.14.2": {
+      "sha512": "hqP/0z5YdT6RBe0S6aE/Y6GoKOr9j/Mt7Gvh6v4SNH1BmBlUV2OA0WH7DXhcomePfz1X1XlrS/akaxXZWDy8iQ==",
+      "type": "package",
+      "path": "gridify/2.14.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "gridify.2.14.2.nupkg.sha512",
+        "gridify.nuspec",
+        "lib/net6.0/Gridify.dll",
+        "lib/net7.0/Gridify.dll",
+        "lib/net8.0/Gridify.dll",
+        "lib/netstandard2.0/Gridify.dll",
+        "lib/netstandard2.1/Gridify.dll"
+      ]
+    },
+    "Gridify.EntityFramework/2.14.2": {
+      "sha512": "7miVPC0SgWNudcXBtJe8ivimP6x560kS/rVYEBljfJS9k7j5C1cJlQPhw15uylLZjb/VL8XVFGHS+yf1kL/fIw==",
+      "type": "package",
+      "path": "gridify.entityframework/2.14.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "gridify.entityframework.2.14.2.nupkg.sha512",
+        "gridify.entityframework.nuspec",
+        "lib/net6.0/Gridify.EntityFramework.dll",
+        "lib/net7.0/Gridify.EntityFramework.dll",
+        "lib/net8.0/Gridify.EntityFramework.dll",
+        "lib/netstandard2.0/Gridify.EntityFramework.dll",
+        "lib/netstandard2.1/Gridify.EntityFramework.dll"
+      ]
+    },
     "MediatR/11.1.0": {
       "sha512": "YIbtrLOyeCuIv8vIuHL/mMdls5xmgS36pIOJDxKZuu55nxA2MI2Z+E/Uk0z+F/LE11AGmpjplOM0NZ91m5LQBA==",
       "type": "package",
@@ -493,6 +565,19 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.1.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
+      ]
+    },
+    "MediatR.Extensions.Microsoft.DependencyInjection/11.1.0": {
+      "sha512": "RW3etRuy6Xp63cgqfC0r/ITOtUT0f9ymJl1+1XZdzsYUsfv7WBPC2kXGOP8IYpY/6c4Q6805vbIW/88DopUs3w==",
+      "type": "package",
+      "path": "mediatr.extensions.microsoft.dependencyinjection/11.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gradient_128x128.png",
+        "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll",
+        "mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
+        "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Cryptography.Internal/8.0.8": {
@@ -994,7 +1079,10 @@
       "AutoMapper >= 13.0.1",
       "Domain >= 1.0.0",
       "FluentValidation.DependencyInjectionExtensions >= 11.10.0",
+      "Gridify >= 2.14.2",
+      "Gridify.EntityFramework >= 2.14.2",
       "MediatR >= 11.1.0",
+      "MediatR.Extensions.Microsoft.DependencyInjection >= 11.1.0",
       "Microsoft.EntityFrameworkCore >= 8.0.8"
     ]
   },
@@ -1004,11 +1092,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\caioa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Application\\obj\\",
+      "outputPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\caioa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1026,8 +1114,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\Domain\\Domain.csproj"
+            "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\Domain\\Domain.csproj"
             }
           }
         }
@@ -1055,7 +1143,19 @@
             "target": "Package",
             "version": "[11.10.0, )"
           },
+          "Gridify": {
+            "target": "Package",
+            "version": "[2.14.2, )"
+          },
+          "Gridify.EntityFramework": {
+            "target": "Package",
+            "version": "[2.14.2, )"
+          },
           "MediatR": {
+            "target": "Package",
+            "version": "[11.1.0, )"
+          },
+          "MediatR.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[11.1.0, )"
           },

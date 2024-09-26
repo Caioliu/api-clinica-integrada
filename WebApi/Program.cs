@@ -1,12 +1,8 @@
-using Domain.Entities;
 using FluentValidation;
 using Infrastructure;
-using Infrastructure.Identity.Services;
+using Application;
 using Infrastructure.Identity.Services.Interfaces;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -22,12 +18,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClinicaIntegrada.API", Version = "v1" });
-
+    var desc = $"API Clinica Integrada <br />{new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime}";
+    c.SwaggerDoc("v1", new OpenApiInfo {
+        Version = Assembly.GetEntryAssembly().GetName().Version.ToString(),
+        Title = "WebApi",
+        Description = desc
+    });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
@@ -37,26 +38,27 @@ builder.Services.AddSwaggerGen(c => {
         Description = "Header de autorização JWT usando o esquema Bearer.\r\n\r\nInforme 'Bearer'[espaço] e o seu token.\r\n\r\nExamplo: \'Bearer 12345abcdef\'",
     });
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-       {
-          new OpenApiSecurityScheme
-          {
-             Reference = new OpenApiReference
-             {
-                 Type = ReferenceType.SecurityScheme,
-                 Id = "Bearer"
-             }
-          },
-          new string[] {}
-       }
-    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+     {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "identity",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+
+                        },
+                        new List<string>()
+                    }
+                 });
 });
 
 builder.Services.AddScoped<IValidator<AutenticacaoViewModel>, AutenticacaoViewModelValidator>();
-
-//MyValidatorDescriptor validatorDescriptor = new MyValidatorDescriptor();
-//object metadataValue = validatorDescriptor.GetMetadata("assistant.py");
 
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

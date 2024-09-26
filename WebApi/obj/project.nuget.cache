@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "v9uUzhhdeNk=",
+  "dgSpecHash": "trNMWEher98=",
   "success": true,
-  "projectFilePath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica\\api-clinica-integrada\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\Users\\caioa\\OneDrive\\Área de Trabalho\\tatakae\\clinica integrada\\backend\\api-clinica-integrada\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\caioa\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\caioa\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
     "C:\\Users\\caioa\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.10.0\\fluentvalidation.dependencyinjectionextensions.11.10.0.nupkg.sha512",
+    "C:\\Users\\caioa\\.nuget\\packages\\gridify\\2.14.2\\gridify.2.14.2.nupkg.sha512",
+    "C:\\Users\\caioa\\.nuget\\packages\\gridify.entityframework\\2.14.2\\gridify.entityframework.2.14.2.nupkg.sha512",
     "C:\\Users\\caioa\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\caioa\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
     "C:\\Users\\caioa\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",

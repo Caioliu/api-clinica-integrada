@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Interfaces;
+using Domain.Entities;
 using FluentValidation;
 using Infrastructure.Identity.Services;
 using Infrastructure.Identity.Services.Interfaces;
@@ -38,12 +39,13 @@ namespace Infrastructure
                 options.User.RequireUniqueEmail = true;
             });
 
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IGeracaoUsuariosPerfisIniciais, GeracaoUsuariosPerfisIniciais>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUsuarioLogado, UsuarioLogado>();
