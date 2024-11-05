@@ -2,6 +2,9 @@
 using Application.Handlers.Pacientes.Commands.Create;
 using Application.Handlers.Pacientes.Commands.Delete;
 using Application.Handlers.Pacientes.Commands.Update;
+using Application.Handlers.Pacientes.Queries.GetPacienteById;
+using Application.Handlers.Pacientes.Queries.GetPacientes;
+using Application.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +14,18 @@ namespace WebApi.Controllers
     [ApiController]
     public class PacientesController : ApiControllerBase
     {
+        //Authorize(Roles = "atendente")
+        [HttpGet]
+        public async Task<ActionResult<PaginatedList<PacienteDto>>> Get([FromQuery] GetPacientesQuery query) {
+            return Ok(await Mediator.Send(query));
+        }
+
+        //Authorize(Roles = "atendente")
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PacienteDto>> GetById(Guid id) {
+            return Ok(await Mediator.Send(new GetPacienteByIdQuery { Id = id }));
+        }
+
         //[Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult<PacienteDto>> Create([FromBody] CreatePacienteCommand command) {
