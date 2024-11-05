@@ -6,6 +6,7 @@ namespace Application.DTOs
 {
     public class PacienteDto : IMapFrom<Paciente>
     {
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public int Idade { get; set; }
@@ -17,6 +18,7 @@ namespace Application.DTOs
 
         public void Mapping(Profile profile) {
             profile.CreateMap<Paciente, PacienteDto>()
+                .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
                 .ForMember(d => d.Nome, opt => opt.MapFrom(s => s.Nome))
                 .ForMember(d => d.Telefone, opt => opt.MapFrom(s => s.Telefone))
                 .ForMember(d => d.Idade, opt => opt.MapFrom(s => s.Idade))

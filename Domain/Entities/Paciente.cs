@@ -13,6 +13,5 @@ namespace Domain.Entities
         public string? Observacao { get; set; }
         public bool RecebeuAlta { get; set; }
 
-
     }
 }
