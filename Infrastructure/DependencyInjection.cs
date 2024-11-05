@@ -2,6 +2,8 @@
 using Domain.Entities;
 using Infrastructure.Identity.Services;
 using Infrastructure.Identity.Services.Interfaces;
+using Infrastructure.Persistence;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +34,7 @@ namespace Infrastructure
             });
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-
+            services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IGeracaoUsuariosPerfisIniciais, GeracaoUsuariosPerfisIniciais>();

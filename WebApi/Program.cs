@@ -1,4 +1,4 @@
-using Infrastructure;
+using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApi

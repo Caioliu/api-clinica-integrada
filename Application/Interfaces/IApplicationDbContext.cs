@@ -12,7 +12,11 @@ namespace Application.Interfaces
     public interface IApplicationDbContext
     {
         DbSet<Usuario> Usuarios { get; set; }
-        
+        DbSet<Paciente> Pacientes { get; set; }
+
+        Task RollBack();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
+
 
     }
 }

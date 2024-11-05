@@ -18,31 +18,39 @@ namespace Infrastructure.Identity.Services
         }
 
         public void GerarPerfis() {
-            if (!_roleManager.RoleExistsAsync("atendente").Result) {
-                Perfil perfil = new();
-                perfil.Name = "atendente";
-                perfil.NormalizedName = perfil.Name.ToUpper();
-                IdentityResult roleResult = _roleManager.CreateAsync(perfil).Result;
-            }
+            string[] perfis = { "atendente", "cliente", "estagiario", "professor" };
 
+            foreach (var perfilNome in perfis) {
+                if (!_roleManager.RoleExistsAsync(perfilNome).Result) {
+                    Perfil perfil = new();
+                    perfil.Name = perfilNome;
+                    perfil.NormalizedName = perfil.Name.ToUpper();
+                    IdentityResult roleResult = _roleManager.CreateAsync(perfil).Result;
+                }
+            }
         }
 
         public void GerarUsuarios() {
-            if (_userManager.FindByNameAsync("atendente@user.com.br").Result == null) {
-                Usuario usuario = new();
-                usuario.Name = "Atendente";
-                usuario.UserName = "atendente@user.com.br";
-                usuario.NormalizedUserName = usuario.UserName.ToUpper();
-                usuario.Email = usuario.UserName;
-                usuario.NormalizedEmail = usuario.Email.ToUpper();
-                usuario.LockoutEnabled = false;
-                usuario.SecurityStamp = Guid.NewGuid().ToString();
-                usuario.PhoneNumber = "38123456789";
+            string[] perfis = { "atendente", "cliente", "estagiario", "professor" };
 
-                IdentityResult result = _userManager.CreateAsync(usuario, "Teste1@").Result;
+            foreach (var perfilNome in perfis) {
+                string email = $"{perfilNome}@user.com.br";
+                if (_userManager.FindByNameAsync(email).Result == null) {
+                    Usuario usuario = new();
+                    usuario.Name = perfilNome.First().ToString().ToUpper() + perfilNome.Substring(1);
+                    usuario.UserName = email;
+                    usuario.NormalizedUserName = usuario.UserName.ToUpper();
+                    usuario.Email = usuario.UserName;
+                    usuario.NormalizedEmail = usuario.Email.ToUpper();
+                    usuario.LockoutEnabled = false;
+                    usuario.SecurityStamp = Guid.NewGuid().ToString();
+                    usuario.PhoneNumber = "38123456789";
 
-                if (result.Succeeded) {
-                    _userManager.AddToRoleAsync(usuario, "atendente").Wait();
+                    IdentityResult result = _userManager.CreateAsync(usuario, "Teste1@").Result;
+
+                    if (result.Succeeded) {
+                        _userManager.AddToRoleAsync(usuario, perfilNome).Wait();
+                    }
                 }
             }
         }
