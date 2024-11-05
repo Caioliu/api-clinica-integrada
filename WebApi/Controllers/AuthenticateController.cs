@@ -26,7 +26,6 @@ namespace WebApi.Controllers
             _configuration = configuration;
         }
 
-
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] AutenticacaoViewModel autenticacaoViewModel) {

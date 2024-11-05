@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
 using WebApi.ViewModels;
 
-namespace WebApi.ViewModelsValidator
+namespace WebApi.ViewModels.ViewModelsValidator
 {
     public class AutenticacaoViewModelValidator : AbstractValidator<AutenticacaoViewModel>
     {
-        public AutenticacaoViewModelValidator() {
+        public AutenticacaoViewModelValidator()
+        {
 
 
             RuleFor(x => x.Email)

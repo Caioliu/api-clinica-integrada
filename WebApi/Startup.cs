@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using WebApi.ViewModels;
-using WebApi.ViewModelsValidator;
+using WebApi.ViewModels.ViewModelsValidator;
 
 namespace WebApi
 {

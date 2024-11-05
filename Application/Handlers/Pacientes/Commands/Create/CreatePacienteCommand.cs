@@ -27,13 +27,20 @@ namespace Application.Handlers.Pacientes.Commands.Create
         public async Task<PacienteDto> Handle(CreatePacienteCommand request, CancellationToken cancellationToken) {
             try {
                 var entity = new Paciente {
-                    Nome = request.Nome
+                    Nome = request.Nome,
+                    Telefone = request.Telefone,
+                    Idade = request.Idade,
+                    NomeResponsavel = request.NomeResponsavel,
+                    ParentescoResponsavel = request.ParentescoResponsavel,
+                    Observacao = request.Observacao,
+                    RecebeuAlta = false
+
                 };
 
                 await _context.Pacientes.AddAsync(entity, cancellationToken);
                 //var historico = entity.GerarHistoricoPersonalizado("Registro Incluído", TipoAcaoHistorico.Incluido, _currentUserService.CurrentUser.Id);
                 //await _context.Historicos.AddAsync(historico, cancellationToken);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
                 return _mapper.Map<PacienteDto>(entity);
             } catch (Exception ex) {
                 await _context.RollBack();
