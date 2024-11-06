@@ -10,6 +10,9 @@ namespace Infrastructure.Persistence.Configurations
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Nome).IsRequired();
 
+            builder.HasMany(p => p.RegistrosListaEspera)
+                .WithOne(p => p.Paciente)
+                .HasForeignKey(p => p.PacienteId);
 
         }
     }

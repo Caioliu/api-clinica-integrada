@@ -13,5 +13,8 @@ namespace Domain.Entities
         public string? Observacao { get; set; }
         public bool RecebeuAlta { get; set; }
 
+        //Relacionamentos
+        public IList<ListaEspera> RegistrosListaEspera { get; set; }
+
     }
 }
