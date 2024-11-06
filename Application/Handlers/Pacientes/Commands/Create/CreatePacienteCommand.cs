@@ -1,52 +1,64 @@
 ﻿using Application.DTOs;
+using Application.Handlers.ListaEspera.Commands;
+using Application.Handlers.ListaEspera.Commands.Create;
 using Application.Interfaces;
+using Application.Models;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Handlers.Pacientes.Commands.Create
 {
-    public class CreatePacienteCommand : PacienteCommand, IRequest<PacienteDto>
+    public class CreatePacienteCommand : IRequest<ServiceResult>
     {
-
+        public PacienteCommand Paciente { get; set; }
+        public ListaEsperaEntryCommand ListaEspera { get; set; }
     }
 
-    public class CreatePacienteCommandHandler : IRequestHandler<CreatePacienteCommand, PacienteDto>
+    public class CreatePacienteCommandHandler : IRequestHandler<CreatePacienteCommand, ServiceResult>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CreatePacienteCommandHandler(IApplicationDbContext context,
-            IMapper mapper
-            ) 
-        {
+        public CreatePacienteCommandHandler(IApplicationDbContext context, IMapper mapper) {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<PacienteDto> Handle(CreatePacienteCommand request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult> Handle(CreatePacienteCommand request, CancellationToken cancellationToken) {
             try {
                 var entity = new Paciente {
-                    Nome = request.Nome,
-                    Telefone = request.Telefone,
-                    Idade = request.Idade,
-                    NomeResponsavel = request.NomeResponsavel,
-                    ParentescoResponsavel = request.ParentescoResponsavel,
-                    Observacao = request.Observacao,
-                    RecebeuAlta = false
-
+                    Nome = request.Paciente.Nome,
+                    Telefone = request.Paciente.Telefone,
+                    Idade = request.Paciente.Idade,
+                    NomeResponsavel = request.Paciente.NomeResponsavel,
+                    ParentescoResponsavel = request.Paciente.ParentescoResponsavel,
+                    Observacao = request.Paciente.Observacao,
+                    RecebeuAlta = request.Paciente.RecebeuAlta
                 };
 
                 await _context.Pacientes.AddAsync(entity, cancellationToken);
-                //var historico = entity.GerarHistoricoPersonalizado("Registro Incluído", TipoAcaoHistorico.Incluido, _currentUserService.CurrentUser.Id);
-                //await _context.Historicos.AddAsync(historico, cancellationToken);
+
+                if (request.ListaEspera != null) {
+                    var listaEsperaEntity = new Domain.Entities.ListaEspera {
+                        DataEntrada = request.ListaEspera.DataEntrada,
+                        DataSaida = request.ListaEspera.DataSaida,
+                        Status = request.ListaEspera.Status,
+                        Prioridade = request.ListaEspera.Prioridade,
+                        PacienteId = entity.Id
+                    };
+
+                    await _context.ListaEspera.AddAsync(listaEsperaEntity, cancellationToken);
+                }
+
                 await _context.SaveChangesAsync(cancellationToken);
-                return _mapper.Map<PacienteDto>(entity);
+
+                return ServiceResult.Success("Ok");
             } catch (Exception ex) {
                 await _context.RollBack();
                 throw;
             }
-
         }
     }
+
 }

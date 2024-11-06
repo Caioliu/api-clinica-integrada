@@ -28,8 +28,8 @@ namespace WebApi.Controllers
 
         //[Authorize(Roles = "atendente")]
         [HttpPost]
-        public async Task<ActionResult<PacienteDto>> Create([FromBody] CreatePacienteCommand command) {
-            return await Mediator.Send(command);
+        public async Task<ActionResult> Create([FromBody] CreatePacienteCommand command) {
+            return Ok(await Mediator.Send(command));
 
         }
 

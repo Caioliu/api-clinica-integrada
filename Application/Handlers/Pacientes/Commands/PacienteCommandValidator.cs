@@ -17,6 +17,9 @@ namespace Application.Handlers.Pacientes.Commands
 
             RuleFor(v => v.Nome)
                 .NotEmpty().WithMessage("Nome é obrigatório.");
+            RuleFor(v => v.Telefone)
+                .NotEmpty().WithMessage("Telefone é obrigatório."); 
+
         }
     }
 }

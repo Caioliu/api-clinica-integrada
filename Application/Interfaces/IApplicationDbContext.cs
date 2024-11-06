@@ -13,6 +13,7 @@ namespace Application.Interfaces
     {
         DbSet<Usuario> Usuarios { get; set; }
         DbSet<Paciente> Pacientes { get; set; }
+        DbSet<ListaEspera> ListaEspera { get; set; }
 
         Task RollBack();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
