@@ -13,17 +13,19 @@ namespace Infrastructure.Persistence
     {
 
         private readonly IDomainEventService _domainEventService;
+        private readonly IDateTime _dateTime;
 
         protected IDbContextTransaction _contextoTransaction { get; set; }
 
 
         public ApplicationDbContext(
             DbContextOptions options,
-            IDomainEventService domainEventService
+            IDomainEventService domainEventService,
+            IDateTime dateTime
             ) : base(options)
         {
             _domainEventService = domainEventService;
-
+            _dateTime = dateTime;
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
@@ -59,6 +61,30 @@ namespace Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) {
             try {
+
+                //Guid? _userId = _currentUserService.UserId != Guid.Empty ? _currentUserService.UserId : null;
+
+                foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> entry in ChangeTracker.Entries<AuditableEntity>()) {
+                    switch (entry.State) {
+                        case EntityState.Added:
+                            //entry.Entity.CreatedBy = _userId;
+                            entry.Entity.Created = _dateTime.Now;
+                            //entry.Entity.GerarHistoricoPersonalizado("Registro Incluído", TipoAcaoHistorico.Incluido, _userId);
+                            break;
+
+                        case EntityState.Modified:
+                            //entry.Entity.LastModifiedBy = _userId;
+                            entry.Entity.LastModified = _dateTime.Now;
+                            break;
+                        case EntityState.Deleted:
+                            //entry.Entity.LastModifiedBy = _userId;
+                            entry.Entity.LastModified = _dateTime.Now;
+                            entry.Entity.ExcludedAt = _dateTime.Now;
+                            //entry.Entity.GerarHistoricoPersonalizado("Registro Excluído", TipoAcaoHistorico.Excluido, _userId);
+                            break;
+                    }
+                }
+
                 var result = await base.SaveChangesAsync(cancellationToken);
 
                 if (_contextoTransaction != null)

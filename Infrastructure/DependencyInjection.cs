@@ -38,6 +38,7 @@ namespace Infrastructure
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IGeracaoUsuariosPerfisIniciais, GeracaoUsuariosPerfisIniciais>();
+            services.AddScoped<IDateTime, DateTimeService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

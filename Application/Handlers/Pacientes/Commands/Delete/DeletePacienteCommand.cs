@@ -12,15 +12,19 @@ namespace Application.Handlers.Pacientes.Commands.Delete
     public class DeletePacienteCommandHandler : IRequestHandlerWrapper<DeletePacienteCommand, string>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapper; 
+        private readonly IDateTime _dateTime;
 
         public DeletePacienteCommandHandler(IApplicationDbContext context,
-                                            IMapper mapper
+                                            IMapper mapper,
+                                            IDateTime dateTime
 
                                             ) 
         {
             _context = context;
             _mapper = mapper;
+            _dateTime = dateTime;
+
         }
 
         public async Task<ServiceResult<string>> Handle(DeletePacienteCommand request, CancellationToken cancellationToken) 
@@ -33,7 +37,9 @@ namespace Application.Handlers.Pacientes.Commands.Delete
                     throw new Exception("No se encontró el paciente");
                 }
 
-                _context.Pacientes.Remove(entity);
+                entity.ExcludedAt = _dateTime.Now;
+                _context.Pacientes.Update(entity);
+
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return ServiceResult.Success("Ok");
