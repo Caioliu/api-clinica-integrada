@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Pacientes.Queries.GetPacienteById
 {
@@ -26,7 +27,9 @@ namespace Application.Handlers.Pacientes.Queries.GetPacienteById
         public async Task<ServiceResult<PacienteDto>> Handle(GetPacienteByIdQuery request, CancellationToken cancellationToken) {
 
             try {
-                var entity = await _context.Pacientes.FindAsync(request.Id);
+                var entity = await _context.Pacientes
+                                           .Where(p => !p.IsDeleted) // Adiciona a condição para IsDeleted
+                                           .FirstOrDefaultAsync(p => p.Id == request.Id);
 
                 if (entity == null) {
                     throw new Exception("No se encontró el paciente");
@@ -38,11 +41,7 @@ namespace Application.Handlers.Pacientes.Queries.GetPacienteById
 
             } catch (Exception e) {
                 throw;
-
-
-
             }
-
         }
     }
 }

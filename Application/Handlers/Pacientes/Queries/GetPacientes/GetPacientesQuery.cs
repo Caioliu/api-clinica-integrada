@@ -21,10 +21,12 @@ namespace Application.Handlers.Pacientes.Queries.GetPacientes
             }
 
             public async Task<ServiceResult<PaginatedList<PacienteDto>>> Handle(GetPacientesQuery request, CancellationToken cancellationToken) {
-                
+
                 var mapper = new GridifyMapper<Paciente>();
 
-                var gridifyQueryable = _context.Pacientes.GridifyQueryable(request, mapper);
+                var gridifyQueryable = _context.Pacientes
+                    .Where(p => !p.IsDeleted)
+                    .GridifyQueryable(request, mapper);
 
                 var query = gridifyQueryable.Query;
                 var result = query.AsNoTracking().ToList();

@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Pacientes.Commands.Delete
 {
@@ -31,13 +32,16 @@ namespace Application.Handlers.Pacientes.Commands.Delete
         {
 
             try {
-                var entity = await _context.Pacientes.FindAsync(request.Id);
+                var entity = await _context.Pacientes
+                    .Where(p => !p.IsDeleted) 
+                    .FirstOrDefaultAsync(p => p.Id == request.Id);
 
                 if (entity == null) {
                     throw new Exception("No se encontró el paciente");
                 }
 
                 entity.ExcludedAt = _dateTime.Now;
+                entity.IsDeleted = true;
                 _context.Pacientes.Update(entity);
 
                 await _context.SaveChangesAsync(cancellationToken);
