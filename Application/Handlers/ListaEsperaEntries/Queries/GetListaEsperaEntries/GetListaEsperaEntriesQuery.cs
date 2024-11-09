@@ -7,7 +7,7 @@ using Gridify;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Handlers.ListaEsperaEntries.Queries.GetListraEsperaEntries
+namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntries
 {
     public class GetListaEsperaEntriesQuery : GridifyQuery, IRequest<PaginatedList<ListaEsperaEntryDto>>
     {
@@ -23,7 +23,8 @@ namespace Application.Handlers.ListaEsperaEntries.Queries.GetListraEsperaEntries
 
 
             public Task<PaginatedList<ListaEsperaEntryDto>> Handle(GetListaEsperaEntriesQuery request, CancellationToken cancellationToken) {
-                var mapper = new GridifyMapper<Domain.Entities.ListaEspera>();
+                var mapper = new GridifyMapper<ListaEspera>()
+                    .GenerateMappings();
 
                 var gridifyQueryable = _context.ListaEspera
                     .Where(p => !p.IsDeleted)

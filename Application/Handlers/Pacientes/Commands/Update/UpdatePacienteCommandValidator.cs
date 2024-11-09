@@ -12,8 +12,7 @@ namespace Application.Handlers.Pacientes.Commands.Update
         {
             context = _context;
 
-            //RuleFor(v => v.Id)
-            //    .NotEmpty().WithMessage("Id é obrigatório.");
+
         }
 
     }

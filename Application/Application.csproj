@@ -20,9 +20,4 @@
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Handlers\ListaEsperaEntries\Commands\Delete\" />
-	  <Folder Include="Handlers\ListaEsperaEntries\Commands\Update\" />
-	</ItemGroup>
-
 </Project>

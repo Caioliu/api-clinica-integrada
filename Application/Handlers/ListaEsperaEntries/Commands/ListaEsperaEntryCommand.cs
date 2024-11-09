@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.ListaEspera.Commands
+namespace Application.Handlers.ListaEsperaEntries.Commands
 {
     public class ListaEsperaEntryCommand
     {

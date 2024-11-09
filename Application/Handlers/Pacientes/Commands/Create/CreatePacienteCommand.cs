@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Handlers.ListaEspera.Commands;
-using Application.Handlers.ListaEspera.Commands.Create;
+﻿using Application.Handlers.ListaEsperaEntries.Commands;
 using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
@@ -19,10 +17,17 @@ namespace Application.Handlers.Pacientes.Commands.Create
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IDateTime _dateTime;
 
-        public CreatePacienteCommandHandler(IApplicationDbContext context, IMapper mapper) {
+        public CreatePacienteCommandHandler(
+            IApplicationDbContext context,
+            IMapper mapper,
+            IDateTime dateTime
+            ) {
             _context = context;
             _mapper = mapper;
+            _dateTime = dateTime;
+
         }
 
         public async Task<ServiceResult> Handle(CreatePacienteCommand request, CancellationToken cancellationToken) {
@@ -40,8 +45,8 @@ namespace Application.Handlers.Pacientes.Commands.Create
                 await _context.Pacientes.AddAsync(entity, cancellationToken);
 
                 if (request.ListaEspera != null) {
-                    var listaEsperaEntity = new Domain.Entities.ListaEspera {
-                        DataEntrada = request.ListaEspera.DataEntrada,
+                    var listaEsperaEntity = new ListaEspera {
+                        DataEntrada = _dateTime.Now,
                         DataSaida = request.ListaEspera.DataSaida,
                         Status = request.ListaEspera.Status,
                         Prioridade = request.ListaEspera.Prioridade,

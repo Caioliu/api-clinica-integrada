@@ -1,10 +1,5 @@
 ﻿using Application.Interfaces;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Handlers.Pacientes.Commands
 {
@@ -15,10 +10,10 @@ namespace Application.Handlers.Pacientes.Commands
         public PacienteCommandValidator(IApplicationDbContext context) {
             _context = context;
 
-            RuleFor(v => v.Nome)
-                .NotEmpty().WithMessage("Nome é obrigatório.");
-            RuleFor(v => v.Telefone)
-                .NotEmpty().WithMessage("Telefone é obrigatório."); 
+            //RuleFor(v => v.Nome)
+            //    .NotEmpty().WithMessage("Nome é obrigatório.");
+            //RuleFor(v => v.Telefone)
+            //    .NotEmpty().WithMessage("Telefone é obrigatório."); 
 
         }
     }
