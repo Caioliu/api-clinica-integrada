@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  webapi:
+    image: webapi:dev
+    build:
+      context: ./WebApi
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Teste1@2
+      MYSQL_DATABASE: clinicaintegradadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
