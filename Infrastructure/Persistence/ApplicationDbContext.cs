@@ -31,6 +31,10 @@ namespace Infrastructure.Persistence
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<ListaEspera> ListaEspera { get; set; }
+        public DbSet<Profissional> Profissionais { get; set; }
+        public DbSet<Equipe> Equipes { get; set; }
+        public DbSet<EquipeProfissional> EquipeProfissional { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
