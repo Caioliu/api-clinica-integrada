@@ -1,20 +1,14 @@
-﻿using Domain.Common;
-using Domain.Enums;
+﻿using Domain.Enums;
 
-namespace Domain.Entities
+namespace Application.Handlers.Profissionais
 {
-    public class Profissional : AuditableEntity
+    public class ProfissionalCommand
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
         public string Nome { get; set; }
         public string RA { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
         public TipoProfissional Tipo { get; set; }
         public TipoEspecialidade Especialidade { get; set; }
-
-        //Relacionamentos
-        public IList<EquipeProfissional> EquipesProfissional { get; set; } 
-
     }
 }

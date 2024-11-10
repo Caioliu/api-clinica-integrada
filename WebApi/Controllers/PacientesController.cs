@@ -14,13 +14,13 @@ namespace WebApi.Controllers
     [ApiController]
     public class PacientesController : ApiControllerBase
     {
-        //Authorize(Roles = "atendente")
+        //[Authorize(Roles = "atendente")]
         [HttpGet]
         public async Task<ActionResult<PaginatedList<PacienteDto>>> Get([FromQuery] GetPacientesQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
-        //Authorize(Roles = "atendente")
+        //[Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
         public async Task<ActionResult<PacienteDto>> GetById(Guid id) {
             return Ok(await Mediator.Send(new GetPacienteByIdQuery { Id = id }));
