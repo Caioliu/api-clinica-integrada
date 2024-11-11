@@ -9,8 +9,8 @@ namespace Application.DTOs
         public Guid Id { get; set; }
         public DateTime DataEntrada { get; set; }
         public DateTime? DataSaida { get; set; }
-        public ListaStatus Status { get; set; }
-        public Prioridade Prioridade { get; set; }
+        public string Status { get; set; }
+        public string Prioridade { get; set; }
         public Guid PacienteId { get; set; }
 
         public void Mapping(AutoMapper.Profile profile) {
