@@ -1,9 +1,11 @@
 ﻿using Application.DTOs;
+using Application.Handlers.Equipes.Queries.GetEquipeById;
 using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
 using Domain.Entities;
 using Gridify;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,6 +49,7 @@ namespace Application.Handlers.Usuarios.Queries.GetUsuarios
             var usersInRole = await _userManager.GetUsersInRoleAsync(role);
             return usersInRole.AsQueryable();
         }
+
 
     }
 

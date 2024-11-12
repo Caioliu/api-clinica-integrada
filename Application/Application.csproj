@@ -20,10 +20,4 @@
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Handlers\Equipes\Commands\Delete\" />
-	  <Folder Include="Handlers\Equipes\Commands\Update\" />
-	  <Folder Include="Handlers\Equipes\Queries\GetEquipeById\" />
-	</ItemGroup>
-
 </Project>

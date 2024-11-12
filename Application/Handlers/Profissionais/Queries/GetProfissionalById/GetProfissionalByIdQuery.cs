@@ -1,7 +1,9 @@
 ﻿using Application.DTOs;
+using Application.Handlers.Equipes.Queries.GetEquipeById;
 using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Profissionais.Queries.GetProfissionalById
@@ -43,5 +45,6 @@ namespace Application.Handlers.Profissionais.Queries.GetProfissionalById
                 throw;
             }
         }
+
     }
 }
