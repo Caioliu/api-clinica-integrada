@@ -21,6 +21,7 @@ namespace WebApi.Controllers
             return Ok(await Mediator.Send(query));
         }
 
+        //Authorize(Roles = "atendente")
         [HttpGet("{id}")]
         public async Task<ActionResult<EquipeDTO>> GetById(Guid id) {
             var result = await Mediator.Send(new GetEquipeByIdQuery { Id = id });
