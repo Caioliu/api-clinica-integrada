@@ -15,26 +15,26 @@ namespace WebApi.Controllers
     {
         //[Authorize(Roles = "atendente")]
         [HttpGet]
-        public async Task<ActionResult<PaginatedList<ListaEsperaEntryDto>>> Get([FromQuery] GetListaEsperaEntriesQuery query) {
+        public async Task<ActionResult<PaginatedList<ListaEsperaEntryDTO>>> Get([FromQuery] GetListaEsperaEntriesQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
         //[Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<ListaEsperaEntryDto>> GetById(Guid id) {
+        public async Task<ActionResult<ListaEsperaEntryDTO>> GetById(Guid id) {
             return Ok(await Mediator.Send(new GetListaEsperaEntryByIdQuery { Id = id }));
         }
 
         //[Authorize(Roles = "atendente")]
         [HttpPost("{pacienteId}")]
-        public async Task<ActionResult<ListaEsperaEntryDto>> Create(CreateListaEsperaEntryCommand command, Guid pacienteId) {
+        public async Task<ActionResult<ListaEsperaEntryDTO>> Create(CreateListaEsperaEntryCommand command, Guid pacienteId) {
             command.PacienteId = pacienteId;
             return Ok(await Mediator.Send(command));
         }
 
         //[Authorize(Roles = "atendente")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ListaEsperaEntryDto>> Update(Guid id, UpdateListaEsperaEntryCommand command) {
+        public async Task<ActionResult<ListaEsperaEntryDTO>> Update(Guid id, UpdateListaEsperaEntryCommand command) {
             command.Id = id;
             return Ok(await Mediator.Send(command));
         }

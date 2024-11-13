@@ -9,8 +9,8 @@ namespace Application.DTOs
 
         public Guid Id { get; set; }
         public string Especialidade { get; set; }
-        public IList<ListProfissionalDto> Estagiarios { get; set; }
-        public IList<ListProfissionalDto> Professores { get; set; }
+        public IList<ListProfissionalDTO> Estagiarios { get; set; }
+        public IList<ListProfissionalDTO> Professores { get; set; }
 
         public void Mapping(MappingProfile profile) {
             profile.CreateMap<Equipe, ListEquipeDTO>()

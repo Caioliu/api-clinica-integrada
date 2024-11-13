@@ -4,7 +4,7 @@ using Domain.Enums;
 
 namespace Application.DTOs
 {
-    public class ListaEsperaEntryDto : IMapFrom<ListaEspera>
+    public class ListaEsperaEntryDTO : IMapFrom<ListaEspera>
     {
         public Guid Id { get; set; }
         public DateTime DataEntrada { get; set; }
@@ -14,7 +14,7 @@ namespace Application.DTOs
         public Guid PacienteId { get; set; }
 
         public void Mapping(AutoMapper.Profile profile) {
-            profile.CreateMap<ListaEspera, ListaEsperaEntryDto>()
+            profile.CreateMap<ListaEspera, ListaEsperaEntryDTO>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
                 .ForMember(d => d.DataEntrada, opt => opt.MapFrom(s => s.DataEntrada))
                 .ForMember(d => d.DataSaida, opt => opt.MapFrom(s => s.DataSaida))

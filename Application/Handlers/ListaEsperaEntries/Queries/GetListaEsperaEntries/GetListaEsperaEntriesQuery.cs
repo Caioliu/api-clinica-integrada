@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntries
 {
-    public class GetListaEsperaEntriesQuery : GridifyQuery, IRequest<PaginatedList<ListaEsperaEntryDto>>
+    public class GetListaEsperaEntriesQuery : GridifyQuery, IRequest<PaginatedList<ListaEsperaEntryDTO>>
     {
-        public class GetListaEsperaQueryHandler : IRequestHandler<GetListaEsperaEntriesQuery, PaginatedList<ListaEsperaEntryDto>>
+        public class GetListaEsperaQueryHandler : IRequestHandler<GetListaEsperaEntriesQuery, PaginatedList<ListaEsperaEntryDTO>>
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntries
             }
 
 
-            public Task<PaginatedList<ListaEsperaEntryDto>> Handle(GetListaEsperaEntriesQuery request, CancellationToken cancellationToken) {
+            public Task<PaginatedList<ListaEsperaEntryDTO>> Handle(GetListaEsperaEntriesQuery request, CancellationToken cancellationToken) {
                 var mapper = new GridifyMapper<ListaEspera>()
                     .GenerateMappings();
 
@@ -33,9 +33,9 @@ namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntries
                 var query = gridifyQueryable.Query;
                 var result = query.AsNoTracking().ToList();
 
-                var resultDTO = _mapper.Map<List<ListaEsperaEntryDto>>(result);
+                var resultDTO = _mapper.Map<List<ListaEsperaEntryDTO>>(result);
 
-                PaginatedList<ListaEsperaEntryDto> listaEsperaEntries = new PaginatedList<ListaEsperaEntryDto>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
+                PaginatedList<ListaEsperaEntryDTO> listaEsperaEntries = new PaginatedList<ListaEsperaEntryDTO>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
                 return Task.FromResult(listaEsperaEntries);
             }
         }

@@ -7,13 +7,13 @@ using System.Text.Json.Serialization;
 
 namespace Application.Handlers.Pacientes.Commands.Update
 {
-    public class UpdatePacienteCommand : PacienteCommand, IRequest<PacienteDto>
+    public class UpdatePacienteCommand : PacienteCommand, IRequest<PacienteDTO>
     {
         [JsonIgnore]
         public Guid Id { get; set; }
     }
 
-    public class UpdatePacienteCommandHandler : IRequestHandler<UpdatePacienteCommand, PacienteDto>
+    public class UpdatePacienteCommandHandler : IRequestHandler<UpdatePacienteCommand, PacienteDTO>
     {
 
         private readonly ISender _mediator;
@@ -29,7 +29,7 @@ namespace Application.Handlers.Pacientes.Commands.Update
             _context = context;
             _mapper = mapper;
         }
-        public async Task<PacienteDto> Handle(UpdatePacienteCommand request, CancellationToken cancellationToken) {
+        public async Task<PacienteDTO> Handle(UpdatePacienteCommand request, CancellationToken cancellationToken) {
             try {
                 var entidadeAlterado = await _context.Pacientes.FindAsync(request.Id);
                 //var entidadeOriginal = (Paciente)entidadeAlterado.Clone();
@@ -51,7 +51,7 @@ namespace Application.Handlers.Pacientes.Commands.Update
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var result = _mapper.Map<PacienteDto>(entidadeAlterado);
+                var result = _mapper.Map<PacienteDTO>(entidadeAlterado);
 
                 return result;
             } catch (Exception ex) {

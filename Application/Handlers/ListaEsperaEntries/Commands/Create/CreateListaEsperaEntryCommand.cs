@@ -6,12 +6,12 @@ using MediatR;
 
 namespace Application.Handlers.ListaEsperaEntries.Commands.Create
 {
-    public class CreateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ListaEsperaEntryDto>
+    public class CreateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ListaEsperaEntryDTO>
     {
 
     }
 
-    public class CreateListaEsperaEntryCommandHandler : IRequestHandler<CreateListaEsperaEntryCommand, ListaEsperaEntryDto>
+    public class CreateListaEsperaEntryCommandHandler : IRequestHandler<CreateListaEsperaEntryCommand, ListaEsperaEntryDTO>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Create
             _mapper = mapper;
         }
 
-        public async Task<ListaEsperaEntryDto> Handle(CreateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
+        public async Task<ListaEsperaEntryDTO> Handle(CreateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
             var entity = new Domain.Entities.ListaEspera {
                 DataEntrada = request.DataEntrada,
                 DataSaida = request.DataSaida,
@@ -33,7 +33,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Create
             await _context.ListaEspera.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<ListaEsperaEntryDto>(entity);
+            return _mapper.Map<ListaEsperaEntryDTO>(entity);
         }
     }
 

@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Pacientes.Queries.GetPacienteById
 {
-    public class GetPacienteByIdQuery : IRequestWrapper<PacienteDto>
+    public class GetPacienteByIdQuery : IRequestWrapper<PacienteDTO>
     {
         public Guid Id { get; set; }
     }
 
-    public class GetPacienteByIdQueryHandler : IRequestHandlerWrapper<GetPacienteByIdQuery, PacienteDto>
+    public class GetPacienteByIdQueryHandler : IRequestHandlerWrapper<GetPacienteByIdQuery, PacienteDTO>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace Application.Handlers.Pacientes.Queries.GetPacienteById
             _mapper = mapper;
         }
 
-        public async Task<ServiceResult<PacienteDto>> Handle(GetPacienteByIdQuery request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult<PacienteDTO>> Handle(GetPacienteByIdQuery request, CancellationToken cancellationToken) {
 
             try {
                 var entity = await _context.Pacientes
@@ -37,7 +37,7 @@ namespace Application.Handlers.Pacientes.Queries.GetPacienteById
                     throw new Exception("No se encontró el paciente");
                 }
 
-                var mappedEntity = _mapper.Map<PacienteDto>(entity);
+                var mappedEntity = _mapper.Map<PacienteDTO>(entity);
 
                 return ServiceResult.Success(mappedEntity);
 

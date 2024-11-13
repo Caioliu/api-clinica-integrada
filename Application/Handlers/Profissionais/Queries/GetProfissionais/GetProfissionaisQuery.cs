@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Profissionais.Queries.GetProfissionais
 {
-    public class GetProfissionaisQuery : GridifyQuery, IRequestWrapper<PaginatedList<ProfissionalDto>>
+    public class GetProfissionaisQuery : GridifyQuery, IRequestWrapper<PaginatedList<ProfissionalDTO>>
     {
-        public class GetProfissionaisHandler : IRequestHandlerWrapper<GetProfissionaisQuery, PaginatedList<ProfissionalDto>>
+        public class GetProfissionaisHandler : IRequestHandlerWrapper<GetProfissionaisQuery, PaginatedList<ProfissionalDTO>>
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace Application.Handlers.Profissionais.Queries.GetProfissionais
                 _mapper = mapper;
             }
 
-            public async Task<ServiceResult<PaginatedList<ProfissionalDto>>> Handle(GetProfissionaisQuery request, CancellationToken cancellationToken) {
+            public async Task<ServiceResult<PaginatedList<ProfissionalDTO>>> Handle(GetProfissionaisQuery request, CancellationToken cancellationToken) {
 
                 var mapper = new GridifyMapper<Profissional>()
                     .GenerateMappings();
@@ -34,9 +34,9 @@ namespace Application.Handlers.Profissionais.Queries.GetProfissionais
                 var query = gridifyQueryable.Query;
                 var result = query.AsNoTracking().ToList();
 
-                var resultDTO = _mapper.Map<List<ProfissionalDto>>(result);
+                var resultDTO = _mapper.Map<List<ProfissionalDTO>>(result);
 
-                PaginatedList<ProfissionalDto> profissionais = new PaginatedList<ProfissionalDto>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
+                PaginatedList<ProfissionalDTO> profissionais = new PaginatedList<ProfissionalDTO>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
                 return ServiceResult.Success(profissionais);
             }
 

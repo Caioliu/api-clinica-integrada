@@ -16,13 +16,13 @@ namespace WebApi.Controllers
     {
         //[Authorize(Roles = "atendente")]
         [HttpGet]
-        public async Task<ActionResult<PaginatedList<PacienteDto>>> Get([FromQuery] GetPacientesQuery query) {
+        public async Task<ActionResult<PaginatedList<PacienteDTO>>> Get([FromQuery] GetPacientesQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
         //[Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<PacienteDto>> GetById(Guid id) {
+        public async Task<ActionResult<PacienteDTO>> GetById(Guid id) {
             return Ok(await Mediator.Send(new GetPacienteByIdQuery { Id = id }));
         }
 
@@ -35,7 +35,7 @@ namespace WebApi.Controllers
 
         //[Authorize(Roles = "atendente")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<PacienteDto>> Update(Guid id, [FromBody] UpdatePacienteCommand command) {
+        public async Task<ActionResult<PacienteDTO>> Update(Guid id, [FromBody] UpdatePacienteCommand command) {
             command.Id = id;
             return await Mediator.Send(command);
 

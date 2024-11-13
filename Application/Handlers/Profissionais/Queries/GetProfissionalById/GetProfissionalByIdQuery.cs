@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Profissionais.Queries.GetProfissionalById
 {
-    public class GetProfissionalByIdQuery : IRequestWrapper<ProfissionalDto>
+    public class GetProfissionalByIdQuery : IRequestWrapper<ProfissionalDTO>
     {
         public Guid Id { get; set; }
     }
 
-    public class GetProfissionalByIdQueryHandler : IRequestHandlerWrapper<GetProfissionalByIdQuery, ProfissionalDto>
+    public class GetProfissionalByIdQueryHandler : IRequestHandlerWrapper<GetProfissionalByIdQuery, ProfissionalDTO>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace Application.Handlers.Profissionais.Queries.GetProfissionalById
             _mapper = mapper;
         }
 
-        public async Task<ServiceResult<ProfissionalDto>> Handle(GetProfissionalByIdQuery request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult<ProfissionalDTO>> Handle(GetProfissionalByIdQuery request, CancellationToken cancellationToken) {
 
             try {
                 var entity = await _context.Profissionais
@@ -37,7 +37,7 @@ namespace Application.Handlers.Profissionais.Queries.GetProfissionalById
                     throw new Exception("No se encontró el profissional");
                 }
 
-                var mappedEntity = _mapper.Map<ProfissionalDto>(entity);
+                var mappedEntity = _mapper.Map<ProfissionalDTO>(entity);
 
                 return ServiceResult.Success(mappedEntity);
 

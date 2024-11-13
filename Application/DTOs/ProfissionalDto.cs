@@ -5,7 +5,7 @@ using Domain.Entities;
 
 namespace Application.DTOs
 {
-    public class ProfissionalDto : IMapFrom<Profissional>
+    public class ProfissionalDTO : IMapFrom<Profissional>
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
@@ -16,7 +16,7 @@ namespace Application.DTOs
         public string Especialidade { get; set; }
 
         public void Mapping(Profile profile) {
-            profile.CreateMap<Profissional, ProfissionalDto>()
+            profile.CreateMap<Profissional, ProfissionalDTO>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
                 .ForMember(d => d.Nome, opt => opt.MapFrom(s => s.Nome))
                 .ForMember(d => d.RA, opt => opt.MapFrom(s => s.RA))

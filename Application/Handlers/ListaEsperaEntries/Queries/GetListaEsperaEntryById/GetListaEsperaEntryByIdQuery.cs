@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntryById
 {
-    public class GetListaEsperaEntryByIdQuery : IRequestWrapper<ListaEsperaEntryDto>
+    public class GetListaEsperaEntryByIdQuery : IRequestWrapper<ListaEsperaEntryDTO>
     {
         public Guid Id { get; set; }
     }
 
-    public class GetListaEsperaEntryByIdQueryHandler : IRequestHandlerWrapper<GetListaEsperaEntryByIdQuery, ListaEsperaEntryDto>
+    public class GetListaEsperaEntryByIdQueryHandler : IRequestHandlerWrapper<GetListaEsperaEntryByIdQuery, ListaEsperaEntryDTO>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntryByI
             _mapper = mapper;
         }
 
-        public async Task<ServiceResult<ListaEsperaEntryDto>> Handle(GetListaEsperaEntryByIdQuery request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult<ListaEsperaEntryDTO>> Handle(GetListaEsperaEntryByIdQuery request, CancellationToken cancellationToken) {
 
             try {
                 var entity = await _context.ListaEspera
@@ -37,7 +37,7 @@ namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntryByI
                     throw new Exception("No se encontró la entrada de la lista de espera");
                 }
 
-                var mappedEntity = _mapper.Map<ListaEsperaEntryDto>(entity);
+                var mappedEntity = _mapper.Map<ListaEsperaEntryDTO>(entity);
 
                 return ServiceResult.Success(mappedEntity);
 

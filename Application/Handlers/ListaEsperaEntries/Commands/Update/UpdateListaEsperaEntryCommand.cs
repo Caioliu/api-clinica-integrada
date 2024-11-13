@@ -7,13 +7,13 @@ using System.Text.Json.Serialization;
 
 namespace Application.Handlers.ListaEsperaEntries.Commands.Update
 {
-    public class UpdateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ListaEsperaEntryDto>
+    public class UpdateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ListaEsperaEntryDTO>
     {
         [JsonIgnore]
         public Guid Id { get; set; }
     }
 
-    public class UpdateListaEsperaEntryCommandHandler : IRequestHandler<UpdateListaEsperaEntryCommand, ListaEsperaEntryDto>
+    public class UpdateListaEsperaEntryCommandHandler : IRequestHandler<UpdateListaEsperaEntryCommand, ListaEsperaEntryDTO>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Update
             _mapper = mapper;
         }
 
-        public async Task<ListaEsperaEntryDto> Handle(UpdateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
+        public async Task<ListaEsperaEntryDTO> Handle(UpdateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
             var entity = await _context.ListaEspera.FindAsync(request.Id);
 
             if (entity == null) {
@@ -38,7 +38,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Update
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<ListaEsperaEntryDto>(entity);
+            return _mapper.Map<ListaEsperaEntryDTO>(entity);
         }
     }
 

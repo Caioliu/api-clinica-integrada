@@ -15,8 +15,8 @@ namespace Application.DTOs
 
         public Guid Id { get; set; }
         public string Especialidade { get; set; }
-        public IList<ProfissionalDto> Estagiarios { get; set; }
-        public IList<ProfissionalDto> Professores { get; set; }
+        public IList<ProfissionalDTO> Estagiarios { get; set; }
+        public IList<ProfissionalDTO> Professores { get; set; }
 
         public void Mapping(MappingProfile profile) {
             profile.CreateMap<Equipe, EquipeDTO>()

@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Pacientes.Queries.GetPacientes
 {
-    public class GetPacientesQuery : GridifyQuery, IRequestWrapper<PaginatedList<PacienteDto>>
+    public class GetPacientesQuery : GridifyQuery, IRequestWrapper<PaginatedList<PacienteDTO>>
     {
-        public class GetPacientesQueryHandler : IRequestHandlerWrapper<GetPacientesQuery, PaginatedList<PacienteDto>>
+        public class GetPacientesQueryHandler : IRequestHandlerWrapper<GetPacientesQuery, PaginatedList<PacienteDTO>>
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace Application.Handlers.Pacientes.Queries.GetPacientes
                 _mapper = mapper;
             }
 
-            public async Task<ServiceResult<PaginatedList<PacienteDto>>> Handle(GetPacientesQuery request, CancellationToken cancellationToken) {
+            public async Task<ServiceResult<PaginatedList<PacienteDTO>>> Handle(GetPacientesQuery request, CancellationToken cancellationToken) {
 
                 var mapper = new GridifyMapper<Paciente>()
                     .GenerateMappings();
@@ -34,9 +34,9 @@ namespace Application.Handlers.Pacientes.Queries.GetPacientes
                 var query = gridifyQueryable.Query;
                 var result = query.AsNoTracking().ToList();
 
-                var resultDTO = _mapper.Map<List<PacienteDto>>(result);
+                var resultDTO = _mapper.Map<List<PacienteDTO>>(result);
 
-                PaginatedList<PacienteDto> pacientes = new PaginatedList<PacienteDto>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
+                PaginatedList<PacienteDTO> pacientes = new PaginatedList<PacienteDTO>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
                 return ServiceResult.Success(pacientes);
             }
         }

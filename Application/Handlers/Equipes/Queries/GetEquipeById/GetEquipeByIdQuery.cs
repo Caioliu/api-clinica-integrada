@@ -28,7 +28,8 @@ namespace Application.Handlers.Equipes.Queries.GetEquipeById
                                            .Where(p => !p.IsDeleted) // Adiciona a condição para IsDeleted
                                            .Include(p => p.Profissionais)
                                                 .ThenInclude(p => p.Profissional)
-                                           .FirstOrDefaultAsync(p => p.Id == request.Id);
+                                           .FirstOrDefaultAsync(p => p.Id == request.Id
+                                           ,cancellationToken: cancellationToken);
 
                 if (entity == null) {
                     return ServiceResult.Failed<EquipeDTO>(ServiceError.CustomMessage("Entidade não encontrada."));
@@ -38,7 +39,7 @@ namespace Application.Handlers.Equipes.Queries.GetEquipeById
 
                 return ServiceResult.Success(mappedEntity);
 
-            } catch (Exception e) {
+            } catch (Exception) {
                 throw;
             }
         }

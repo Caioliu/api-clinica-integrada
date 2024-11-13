@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs
 {
-    public class ListProfissionalDto : IMapFrom<Profissional>
+    public class ListProfissionalDTO : IMapFrom<Profissional>
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
 
         public void Mapping(MappingProfile profile) {
-            profile.CreateMap<Profissional, ListProfissionalDto>()
+            profile.CreateMap<Profissional, ListProfissionalDTO>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
                 .ForMember(d => d.Nome, opt => opt.MapFrom(s => s.Nome))
                 ;
