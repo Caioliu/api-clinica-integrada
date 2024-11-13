@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+using Application.DTOs;
 using Application.Handlers.Equipes.Commands.Create;
 using Application.Handlers.Equipes.Commands.Delete;
 using Application.Handlers.Equipes.Commands.Update;
