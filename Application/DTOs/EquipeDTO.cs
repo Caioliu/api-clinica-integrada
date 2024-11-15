@@ -23,8 +23,8 @@ namespace Application.DTOs
 
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
                 .ForMember(d => d.Especialidade, opt => opt.MapFrom(s => s.Especialidade))
-                .ForMember(d => d.Estagiarios, opt => opt.MapFrom(s => s.Profissionais.Where(ep => ep.Profissional.Tipo == TipoProfissional.Estagiario).Select(ep => ep.Profissional)))
-                .ForMember(d => d.Professores, opt => opt.MapFrom(s => s.Profissionais.Where(ep => ep.Profissional.Tipo == TipoProfissional.Professor).Select(ep => ep.Profissional)))
+                .ForMember(d => d.Estagiarios, opt => opt.MapFrom(s => s.Profissionais.Where(ep => ep.Profissional.Tipo == ProfissionalTipo.Estagiario).Select(ep => ep.Profissional)))
+                .ForMember(d => d.Professores, opt => opt.MapFrom(s => s.Profissionais.Where(ep => ep.Profissional.Tipo == ProfissionalTipo.Professor).Select(ep => ep.Profissional)))
                 ;
         }
     }    

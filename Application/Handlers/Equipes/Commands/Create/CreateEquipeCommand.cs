@@ -14,7 +14,7 @@ namespace Application.Handlers.Equipes.Commands.Create
 {
     public class CreateEquipeCommand : IRequest<ServiceResult>
     {
-        public TipoEspecialidade Especialidade { get; set; }
+        public Especialidade Especialidade { get; set; }
         public IList<Guid> Estagiarios { get; set; }
         public IList<Guid> Professores { get; set; }
     }

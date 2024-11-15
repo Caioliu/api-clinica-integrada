@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    public enum TipoProfissional
+    public enum ProfissionalTipo
     {
         Estagiario = 1,
         Professor = 2
