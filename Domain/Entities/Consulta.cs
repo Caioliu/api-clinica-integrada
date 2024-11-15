@@ -15,5 +15,7 @@ namespace Domain.Entities
         //Relacionamentos
         public Guid AgendamentoId { get; set; }
         public Agendamento Agendamento { get; set; }
+        public Guid EquipeId { get; set; }
+        public Equipe Equipe { get; set; }
     }
 }

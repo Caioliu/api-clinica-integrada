@@ -1,6 +1,5 @@
-﻿using Application.DTOs;
-using Application.Handlers.Salas.Commands.Create;
-using Application.Handlers.Salas.Queries.GetSalas;
+﻿using Application.Handlers.Agendamentos.Commands.Create;
+using Application.Handlers.Agendamentos.Queries.GetAgendamentos;
 using Application.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -8,19 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Route("api/salas")]
+    [Route("api/agendamentos")]
     [ApiController]
-    public class SalasController : ApiControllerBase
+    public class AgendamentosController : ApiControllerBase
     {
         //[Authorize(Roles = "atendente")]
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] GetSalasQuery query) {
+        public async Task<ActionResult> Get([FromQuery] GetAgendamentosQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
         //[Authorize(Roles = "atendente")]
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateSalaCommand command) {
+        public async Task<ActionResult> Create([FromBody] CreateAgendamentoCommand command) {
             var result = await Mediator.Send(command);
             if (!result.Succeeded) {
                 return BadRequest(result);

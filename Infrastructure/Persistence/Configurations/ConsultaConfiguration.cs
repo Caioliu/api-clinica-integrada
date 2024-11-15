@@ -15,6 +15,10 @@ namespace Infrastructure.Persistence.Configurations
                 .WithOne(a => a.Consulta)
                 .HasForeignKey<Consulta>(b => b.AgendamentoId);
 
+            builder.HasOne(p => p.Equipe)
+                .WithMany(p => p.Consultas)
+                .HasForeignKey(p => p.EquipeId);
+
         }
     }
 }

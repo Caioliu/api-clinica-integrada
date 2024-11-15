@@ -11,6 +11,6 @@ namespace Domain.Entities
 
         //Relacionamentos
         public IList<EquipeProfissional> Profissionais { get; set; }
-        public IList<Agendamento> Agendamentos { get; set; }
+        public IList<Consulta> Consultas { get; set; }
     }
 }

@@ -21,6 +21,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Handlers\Agendamentos\Commands\Delete\" />
+	  <Folder Include="Handlers\Agendamentos\Commands\Update\" />
 	  <Folder Include="Handlers\Equipes\Commands\Delete\" />
 	  <Folder Include="Handlers\Equipes\Commands\Update\" />
 	  <Folder Include="Handlers\Equipes\Queries\GetEquipeById\" />
