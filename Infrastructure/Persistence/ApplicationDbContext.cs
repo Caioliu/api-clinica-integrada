@@ -34,6 +34,10 @@ namespace Infrastructure.Persistence
         public DbSet<Profissional> Profissionais { get; set; }
         public DbSet<Equipe> Equipes { get; set; }
         public DbSet<EquipeProfissional> EquipeProfissional { get; set; }
+        public DbSet<Agendamento> Agendamentos { get; set; }
+        public DbSet<Consulta> Consultas { get; set; }
+        public DbSet<Sala> Salas { get; set; }
+
 
 
 

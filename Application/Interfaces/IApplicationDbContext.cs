@@ -17,6 +17,9 @@ namespace Application.Interfaces
         DbSet<Profissional> Profissionais { get; set; }
         DbSet<Equipe> Equipes { get; set ; }
         DbSet<EquipeProfissional> EquipeProfissional { get; set; }
+        DbSet<Agendamento> Agendamentos { get; set; }
+        DbSet<Consulta> Consultas { get; set; }
+        DbSet<Sala> Salas { get; set; }
 
         Task RollBack();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
