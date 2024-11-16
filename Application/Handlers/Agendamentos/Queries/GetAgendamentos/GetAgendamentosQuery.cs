@@ -10,36 +10,38 @@ namespace Application.Handlers.Agendamentos.Queries.GetAgendamentos
 {
     public class GetAgendamentosQuery : GridifyQuery, IRequestWrapper<PaginatedList<AgendamentoDTO>>
     {
-        public class GetAgendamentosHandler : IRequestHandlerWrapper<GetAgendamentosQuery, PaginatedList<AgendamentoDTO>>
-        {
-            private readonly IApplicationDbContext _context;
-            private readonly IMapper _mapper;
+    }
 
-            public GetAgendamentosHandler(IApplicationDbContext context, IMapper mapper) {
-                _context = context;
-                _mapper = mapper;
-            }
+    public class GetAgendamentosHandler : IRequestHandlerWrapper<GetAgendamentosQuery, PaginatedList<AgendamentoDTO>>
+    {
+        private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-            public async Task<ServiceResult<PaginatedList<AgendamentoDTO>>> Handle(GetAgendamentosQuery request, CancellationToken cancellationToken) {
+        public GetAgendamentosHandler(IApplicationDbContext context, IMapper mapper) {
+            _context = context;
+            _mapper = mapper;
+        }
 
-                var mapper = new GridifyMapper<Agendamento>()
-                    .GenerateMappings();
+        public async Task<ServiceResult<PaginatedList<AgendamentoDTO>>> Handle(GetAgendamentosQuery request, CancellationToken cancellationToken) {
 
-                var gridifyQueryable = _context.Agendamentos
-                    .Where(p => !p.IsDeleted)
-                    .GridifyQueryable(request, mapper);
+            var mapper = new GridifyMapper<Agendamento>()
+                .GenerateMappings();
 
-                var query = gridifyQueryable.Query;
-                var result = query.AsNoTracking().ToList();
+            var gridifyQueryable = _context.Agendamentos
+                .Where(p => !p.IsDeleted)
+                .GridifyQueryable(request, mapper);
 
-                var resultDTO = _mapper.Map<List<AgendamentoDTO>>(result);
+            var query = gridifyQueryable.Query;
+            var result = query.AsNoTracking().ToList();
 
-                PaginatedList<AgendamentoDTO> agendamentos = new PaginatedList<AgendamentoDTO>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
-                return ServiceResult.Success(agendamentos);
-            }
+            var resultDTO = _mapper.Map<List<AgendamentoDTO>>(result);
+
+            PaginatedList<AgendamentoDTO> agendamentos = new PaginatedList<AgendamentoDTO>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
+            return ServiceResult.Success(agendamentos);
         }
     }
 
-    
+
+
 }
 

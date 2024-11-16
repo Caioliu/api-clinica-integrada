@@ -4,19 +4,19 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Handlers.Agendamentos.Commands.Create
+namespace Application.Handlers.Consultas.Commands.Create
 {
-    public class CreateAgendamentoCommand : AgendamentoCommand, IRequest<ServiceResult>
+    public class CreateConsultaCommand : ConsultaCommand, IRequest<ServiceResult>
     {
 
     }
 
-    public class CreateAgendamentoCommandHandler : IRequestHandler<CreateAgendamentoCommand, ServiceResult>
+    public class CreateConsultaCommandHandler : IRequestHandler<CreateConsultaCommand, ServiceResult>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CreateAgendamentoCommandHandler(
+        public CreateConsultaCommandHandler(
             IApplicationDbContext context,
             IMapper mapper
             ) {
@@ -25,20 +25,19 @@ namespace Application.Handlers.Agendamentos.Commands.Create
 
         }
 
-        public async Task<ServiceResult> Handle(CreateAgendamentoCommand request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult> Handle(CreateConsultaCommand request, CancellationToken cancellationToken) {
             try {
-                var entity = new Agendamento {
+                var entity = new Consulta {
+                    Observacao = request.Observacao,
                     DataHoraInicio = request.DataHoraInicio,
                     DataHoraFim = request.DataHoraFim,
-                    Tipo = request.Tipo,
+                    Especialidade = request.Especialidade,
                     Status = request.Status,
-                    PacienteId = request.PacienteId,
-                    //EquipeId = request.EquipeId,
-                    SalaId = request.SalaId,
-                    ConsultaId = request.ConsultaId
+                    AgendamentoId = request.AgendamentoId,
+                    EquipeId = request.EquipeId
                 };
 
-                await _context.Agendamentos.AddAsync(entity, cancellationToken);
+                await _context.Consultas.AddAsync(entity, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return ServiceResult.Success("Ok");

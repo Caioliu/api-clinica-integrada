@@ -10,33 +10,35 @@ namespace Application.Handlers.Salas.Queries.GetSalas
 {
     public class GetSalasQuery : GridifyQuery, IRequestWrapper<PaginatedList<SalaDTO>>
     {
-        public class GetSalasHandler : IRequestHandlerWrapper<GetSalasQuery, PaginatedList<SalaDTO>>
-        {
-            private readonly IApplicationDbContext _context;
-            private readonly IMapper _mapper;
+    }
 
-            public GetSalasHandler(IApplicationDbContext context, IMapper mapper) {
-                _context = context;
-                _mapper = mapper;
-            }
+    public class GetSalasHandler : IRequestHandlerWrapper<GetSalasQuery, PaginatedList<SalaDTO>>
+    {
+        private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-            public async Task<ServiceResult<PaginatedList<SalaDTO>>> Handle(GetSalasQuery request, CancellationToken cancellationToken) {
+        public GetSalasHandler(IApplicationDbContext context, IMapper mapper) {
+            _context = context;
+            _mapper = mapper;
+        }
 
-                var mapper = new GridifyMapper<Sala>()
-                    .GenerateMappings();
+        public async Task<ServiceResult<PaginatedList<SalaDTO>>> Handle(GetSalasQuery request, CancellationToken cancellationToken) {
 
-                var gridifyQueryable = _context.Salas
-                    .Where(p => !p.IsDeleted)
-                    .GridifyQueryable(request, mapper);
+            var mapper = new GridifyMapper<Sala>()
+                .GenerateMappings();
 
-                var query = gridifyQueryable.Query;
-                var result = query.AsNoTracking().ToList();
+            var gridifyQueryable = _context.Salas
+                .Where(p => !p.IsDeleted)
+                .GridifyQueryable(request, mapper);
 
-                var resultDTO = _mapper.Map<List<SalaDTO>>(result);
+            var query = gridifyQueryable.Query;
+            var result = query.AsNoTracking().ToList();
 
-                PaginatedList<SalaDTO> salas = new PaginatedList<SalaDTO>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
-                return ServiceResult.Success(salas);
-            }
+            var resultDTO = _mapper.Map<List<SalaDTO>>(result);
+
+            PaginatedList<SalaDTO> salas = new PaginatedList<SalaDTO>(resultDTO, gridifyQueryable.Count, request.Page, request.PageSize);
+            return ServiceResult.Success(salas);
         }
     }
+
 }

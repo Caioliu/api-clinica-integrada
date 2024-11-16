@@ -11,7 +11,7 @@ using WebApi.ViewModels;
 
 namespace WebApi.Controllers
 {
-    [Route("api/authenticate")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace WebApi.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] AutenticacaoViewModel autenticacaoViewModel) {
             ValidationResult validationResult = await _validator.ValidateAsync(autenticacaoViewModel);
