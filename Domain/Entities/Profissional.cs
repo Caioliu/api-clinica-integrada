@@ -11,7 +11,7 @@ namespace Domain.Entities
         public string Telefone { get; set; }
         public string Email { get; set; }
         public TipoProfissional Tipo { get; set; }
-        public TipoEspecialidade Especialidade { get; set; }
+        public Especialidade Especialidade { get; set; }
 
         //Relacionamentos
         public IList<EquipeProfissional> EquipesProfissional { get; set; } 

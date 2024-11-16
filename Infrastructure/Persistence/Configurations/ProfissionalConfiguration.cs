@@ -11,6 +11,7 @@ namespace Infrastructure.Persistence.Configurations
  
             builder.Property(p => p.Nome)
                 .IsRequired();
+
             builder.Property(p => p.RA)
                 .IsRequired(); 
 

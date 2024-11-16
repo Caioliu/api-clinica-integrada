@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    public enum TipoEspecialidade
+    public enum Especialidade
     {
         Psicologia = 1,
         Odontologia = 2,

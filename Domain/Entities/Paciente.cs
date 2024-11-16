@@ -15,6 +15,8 @@ namespace Domain.Entities
 
         //Relacionamentos
         public IList<ListaEspera> RegistrosListaEspera { get; set; }
+        public IList<Agendamento> Agendamentos { get; set; }
+
 
     }
 }
