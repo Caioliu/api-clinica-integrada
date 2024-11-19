@@ -47,5 +47,3 @@ namespace Application.Handlers.Agendamentos.Queries.GetAgendamentoById
         }
 
     }
-
-}

@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+using Application.DTOs;
 using Application.Handlers.Consultas.Commands.Create;
 using Application.Handlers.Consultas.Commands.Delete;
 using Application.Handlers.Consultas.Commands.Update;
