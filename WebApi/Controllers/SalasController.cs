@@ -1,9 +1,11 @@
 ﻿using Application.DTOs;
 using Application.Handlers.Salas.Commands.Create;
+using Application.Handlers.Salas.Commands.Delete;
+using Application.Handlers.Salas.Commands.Update;
+using Application.Handlers.Salas.Queries.GetSalaById;
 using Application.Handlers.Salas.Queries.GetSalas;
 using Application.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -18,9 +20,37 @@ namespace WebApi.Controllers
             return Ok(await Mediator.Send(query));
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SalaDTO>> GetById(Guid id) {
+            var result = await Mediator.Send(new GetSalaByIdQuery { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
         //[Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateSalaCommand command) {
+            var result = await Mediator.Send(command);
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(Guid id) {
+            var result = await Mediator.Send(new DeleteSalaCommand { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SalaDTO>> Update(Guid id, [FromBody] UpdateSalaCommand command) {
+            command.Id = id;
             var result = await Mediator.Send(command);
             if (!result.Succeeded) {
                 return BadRequest(result);

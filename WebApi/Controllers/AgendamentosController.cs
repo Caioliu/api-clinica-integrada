@@ -1,5 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Handlers.Agendamentos.Commands.Create;
+using Application.Handlers.Agendamentos.Commands.Delete;
+using Application.Handlers.Agendamentos.Commands.Update;
+using Application.Handlers.Agendamentos.Queries.GetAgendamentoById;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentos;
 using Application.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +21,15 @@ namespace WebApi.Controllers
             return Ok(await Mediator.Send(query));
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AgendamentoDTO>> GetById(Guid id) {
+            var result = await Mediator.Send(new GetAgendamentoByIdQuery { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
         //[Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateAgendamentoCommand command) {
@@ -27,5 +39,28 @@ namespace WebApi.Controllers
             }
             return Ok(result);
         }
+
+        //[Authorize(Roles = "atendente")]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(Guid id) {
+            var result = await Mediator.Send(new DeleteAgendamentoCommand { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        //[Authorize(Roles = "atendente")]
+        [HttpPut("{id}")]
+        public async Task<ActionResult<AgendamentoDTO>> Update(Guid id, [FromBody] UpdateAgendamentoCommand command) {
+            command.Id = id;
+            var result = await Mediator.Send(command);
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+
     }
 }
