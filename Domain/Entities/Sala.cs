@@ -12,5 +12,6 @@ namespace Domain.Entities
 
         //Relacionamentos
         public IList<Agendamento> Reservas { get; set; }
+
     }
 }

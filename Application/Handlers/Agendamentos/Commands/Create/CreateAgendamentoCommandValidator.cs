@@ -1,12 +1,14 @@
 ﻿using Application.Interfaces;
+using FluentValidation;
 
 namespace Application.Handlers.Agendamentos.Commands.Create
 {
-    public class CreateAgendamentoCommandValidator : AgendamentoCommandValidator<CreateAgendamentoCommand>
+    public class CreateAgendamentoCommandValidator : AbstractValidator<CreateAgendamentoCommand>
     {
         protected readonly IApplicationDbContext _context;
         public CreateAgendamentoCommandValidator(IApplicationDbContext context)
-            : base(context) {
+        {
+            _context = context;
 
         }
     }

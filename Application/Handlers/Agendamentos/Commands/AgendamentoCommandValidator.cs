@@ -10,7 +10,7 @@ namespace Application.Handlers.Agendamentos.Commands
         public AgendamentoCommandValidator(IApplicationDbContext context) {
             _context = context;
 
-            RuleFor(v => v.DataHoraInicio)
+            RuleFor(v => v.DataHora)
                 .NotEmpty().WithMessage("DataHoraInicio é obrigatório.");
             RuleFor(v => v.Tipo)
                 .NotEmpty().WithMessage("Tipo é obrigatório.");

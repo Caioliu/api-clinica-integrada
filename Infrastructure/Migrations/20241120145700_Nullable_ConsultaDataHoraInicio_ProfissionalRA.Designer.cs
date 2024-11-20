@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120145700_Nullable_ConsultaDataHoraInicio_ProfissionalRA")]
+    partial class Nullable_ConsultaDataHoraInicio_ProfissionalRA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,7 +76,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("SalaId");
 
-                    b.ToTable("Agendamentos", (string)null);
+                    b.ToTable("Agendamentos");
                 });
 
             modelBuilder.Entity("Domain.Entities.Consulta", b =>
@@ -130,7 +133,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("EquipeId");
 
-                    b.ToTable("Consultas", (string)null);
+                    b.ToTable("Consultas");
                 });
 
             modelBuilder.Entity("Domain.Entities.Equipe", b =>
@@ -162,7 +165,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Equipes", (string)null);
+                    b.ToTable("Equipes");
                 });
 
             modelBuilder.Entity("Domain.Entities.EquipeProfissional", b =>
@@ -177,7 +180,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ProfissionalId");
 
-                    b.ToTable("EquipeProfissional", (string)null);
+                    b.ToTable("EquipeProfissional");
                 });
 
             modelBuilder.Entity("Domain.Entities.ListaEspera", b =>
@@ -223,7 +226,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PacienteId");
 
-                    b.ToTable("ListaEspera", (string)null);
+                    b.ToTable("ListaEspera");
                 });
 
             modelBuilder.Entity("Domain.Entities.Paciente", b =>
@@ -275,7 +278,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pacientes", (string)null);
+                    b.ToTable("Pacientes");
                 });
 
             modelBuilder.Entity("Domain.Entities.Perfil", b =>
@@ -353,7 +356,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Profissionais", (string)null);
+                    b.ToTable("Profissionais");
                 });
 
             modelBuilder.Entity("Domain.Entities.Sala", b =>
@@ -392,7 +395,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Salas", (string)null);
+                    b.ToTable("Salas");
                 });
 
             modelBuilder.Entity("Domain.Entities.Usuario", b =>

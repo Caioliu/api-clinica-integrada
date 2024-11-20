@@ -36,7 +36,7 @@ namespace Application.Handlers.Consultas.Queries.GetConsultas
                 .GridifyQueryable(request, mapper);
 
             var query = gridifyQueryable.Query;
-            var result = query.AsNoTracking().ToList();
+            var result = await query.AsNoTracking().ToListAsync(cancellationToken);
 
             var resultDTO = _mapper.Map<List<ConsultaDTO>>(result);
 

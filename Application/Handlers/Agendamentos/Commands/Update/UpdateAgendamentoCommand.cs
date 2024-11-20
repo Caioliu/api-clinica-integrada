@@ -38,7 +38,7 @@ namespace Application.Handlers.Agendamentos.Commands.Update
                     throw new Exception(nameof(Agendamento));
                 }
 
-                entidadeAlterado.DataHoraInicio = request.DataHoraInicio;
+                entidadeAlterado.DataHoraInicio = request.DataHora;
                 entidadeAlterado.DataHoraFim = request.DataHoraFim;
                 entidadeAlterado.Tipo = request.Tipo;
                 entidadeAlterado.Status = request.Status;

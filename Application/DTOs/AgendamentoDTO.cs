@@ -8,8 +8,7 @@ namespace Application.DTOs
     public class AgendamentoDTO : IMapFrom<Agendamento>
     {
         public Guid Id { get; set; }
-        public DateTime DataHoraInicio { get; set; }
-        public DateTime? DataHoraFim { get; set; }
+        public DateTime DataHora { get; set; }
         public string Tipo { get; set; }
         public string Status { get; set; }
         public Guid PacienteId { get; set; }
@@ -19,8 +18,7 @@ namespace Application.DTOs
         public void Mapping(MappingProfile profile) {
             profile.CreateMap<Agendamento, AgendamentoDTO>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
-                .ForMember(d => d.DataHoraInicio, opt => opt.MapFrom(s => s.DataHoraInicio))
-                .ForMember(d => d.DataHoraFim, opt => opt.MapFrom(s => s.DataHoraFim))
+                .ForMember(d => d.DataHora, opt => opt.MapFrom(s => s.DataHoraInicio))
                 .ForMember(d => d.Tipo, opt => opt.MapFrom(s => s.Tipo))
                 .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status))
                 .ForMember(d => d.PacienteId, opt => opt.MapFrom(s => s.PacienteId))

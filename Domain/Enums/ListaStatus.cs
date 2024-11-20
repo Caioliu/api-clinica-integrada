@@ -9,7 +9,7 @@ namespace Domain.Enums
     public enum ListaStatus
     {
         Aguardando = 1,
-        Concebido = 2,
+        Atendido = 2,
         Cancelado = 3
     }
 }

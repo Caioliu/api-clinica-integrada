@@ -11,6 +11,8 @@ namespace Application.Handlers.Consultas.Commands
         public ConsultaStatus Status { get; set; }
         public Guid AgendamentoId { get; set; }
         public Guid EquipeId { get; set; }
+        public Guid PacienteId { get; set; }
+        public Guid SalaId { get; set; }
 
     }
 }

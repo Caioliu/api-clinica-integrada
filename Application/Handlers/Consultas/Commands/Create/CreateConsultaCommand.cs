@@ -34,7 +34,7 @@ namespace Application.Handlers.Consultas.Commands.Create
                     Especialidade = request.Especialidade,
                     Status = request.Status,
                     AgendamentoId = request.AgendamentoId,
-                    EquipeId = request.EquipeId
+                    EquipeId = request.EquipeId,
                 };
 
                 await _context.Consultas.AddAsync(entity, cancellationToken);
