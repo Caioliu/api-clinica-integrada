@@ -31,7 +31,7 @@ namespace WebApi.Controllers
         }
 
         //[Authorize(Roles = "atendente")]
-        [HttpPost]
+        [HttpPost("consulta-triagem")]
         public async Task<ActionResult> Create([FromBody] CreateAgendamentoCommand command) {
             var result = await Mediator.Send(command);
             if (!result.Succeeded) {

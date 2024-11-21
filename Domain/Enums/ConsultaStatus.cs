@@ -2,10 +2,11 @@
 {
     public enum ConsultaStatus
     {
-        Agendada = 1,
-        Triagem = 2,
-        EmAndamento = 3,
-        Concluida = 4,
-        Cancelada = 5
+        Agendada = 1, // Post Agendamento
+        Triagem = 2, // Iniciar Triagem
+        AguardandoConsulta = 3, // Finalizar Triagem
+        EmAndamento = 4, //Iniciar Consulta
+        Concluida = 5, //Finalizar Consulta
+        Cancelada = 6
     }
 }

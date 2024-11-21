@@ -6,7 +6,7 @@ using Domain.Entities;
 using MediatR;
 using System.Text.Json.Serialization;
 
-namespace Application.Handlers.Consultas.Commands.Update
+namespace Application.Handlers.Consultas.Commands.Update.UpdateConsulta
 {
     public class UpdateConsultaCommand : ConsultaCommand, IRequest<ServiceResult<ConsultaDTO>>
     {

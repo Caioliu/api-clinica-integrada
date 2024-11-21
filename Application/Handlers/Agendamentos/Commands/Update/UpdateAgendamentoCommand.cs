@@ -39,7 +39,7 @@ namespace Application.Handlers.Agendamentos.Commands.Update
                 }
 
                 entidadeAlterado.DataHoraInicio = request.DataHora;
-                entidadeAlterado.DataHoraFim = request.DataHoraFim;
+                //entidadeAlterado.DataHoraFim = request.DataHoraFim;
                 entidadeAlterado.Tipo = request.Tipo;
                 entidadeAlterado.Status = request.Status;
                 entidadeAlterado.PacienteId = request.PacienteId;

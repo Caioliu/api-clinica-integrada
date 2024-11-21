@@ -5,7 +5,6 @@ namespace Application.Handlers.Agendamentos.Commands
     public class AgendamentoCommand
     {
         public DateTime DataHora { get; set; }
-        public DateTime? DataHoraFim { get; set; }
         public AgendamentoTipo Tipo { get; set; }
         public AgendamentoStatus Status { get; set; }
         public Guid PacienteId { get; set; }

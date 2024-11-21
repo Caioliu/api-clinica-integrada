@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 
-namespace Application.Handlers.Consultas.Commands.Update
+namespace Application.Handlers.Consultas.Commands.Update.UpdateConsulta
 {
     public class UpdateConsultaCommandValidator : ConsultaCommandValidator<UpdateConsultaCommand>
     {

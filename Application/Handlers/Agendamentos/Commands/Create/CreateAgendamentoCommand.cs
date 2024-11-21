@@ -30,7 +30,7 @@ namespace Application.Handlers.Agendamentos.Commands.Create
             try {
                 var agendamentoEntity = new Agendamento {
                     DataHoraInicio = request.Agendamento.DataHora,
-                    DataHoraFim = request.Agendamento.DataHoraFim,
+                    //DataHoraFim = request.Agendamento.DataHoraFim,
                     Tipo = request.Agendamento.Tipo,
                     Status = request.Agendamento.Status,
                     PacienteId = request.Agendamento.PacienteId,

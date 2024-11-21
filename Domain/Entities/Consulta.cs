@@ -13,7 +13,7 @@ namespace Domain.Entities
         public ConsultaStatus Status { get; set; }
 
         //Relacionamentos
-        public Guid? AgendamentoId { get; set; }
+        public Guid AgendamentoId { get; set; }
         public Agendamento Agendamento { get; set; }
         public Guid? EquipeId { get; set; }
         public Equipe Equipe { get; set; }
