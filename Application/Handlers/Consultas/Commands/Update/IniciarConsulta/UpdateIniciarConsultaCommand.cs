@@ -29,11 +29,11 @@ namespace Application.Handlers.Consultas.Commands.Update.UpdateDisponibilidadeSa
             _mediator = sender;
         }
 
-        public async Task<ServiceResult> Handle (UpdateIniciarConsultaCommand request, CancellationToken cancellationToken) 
-        {
+        public async Task<ServiceResult> Handle(UpdateIniciarConsultaCommand request, CancellationToken cancellationToken) {
             try {
                 var consulta = await _context.Consultas
-                    .FindAsync(request.ConsultaId);
+                    .Include(c => c.Agendamento) // Inclui o Agendamento relacionado
+                    .FirstOrDefaultAsync(c => c.Id == request.ConsultaId);
 
                 if (consulta == null) {
                     throw new Exception(nameof(Consulta));

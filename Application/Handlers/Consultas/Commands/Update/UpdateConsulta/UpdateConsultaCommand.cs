@@ -12,6 +12,7 @@ namespace Application.Handlers.Consultas.Commands.Update.UpdateConsulta
     {
         [JsonIgnore]
         public Guid Id { get; set; }
+        public Guid? SalaId { get; set; }
     }
 
     public class UpdateConsultaCommandHandler : IRequestHandler<UpdateConsultaCommand, ServiceResult<ConsultaDTO>>
@@ -46,6 +47,11 @@ namespace Application.Handlers.Consultas.Commands.Update.UpdateConsulta
                 entidadeAlterado.Especialidade = request.Especialidade;
                 entidadeAlterado.Status = request.Status;
                 entidadeAlterado.AgendamentoId = request.AgendamentoId;
+
+                if (request.SalaId.HasValue) {
+                    var agendamento = await _context.Agendamentos.FindAsync(entidadeAlterado.AgendamentoId);
+                    agendamento.SalaId = request.SalaId;
+                }
 
                 //var historico = entidadeOriginal.GerarHistoricoDiferenca(entidadeAlterado, entidadeAlterado.Id, _currentUserService.UserId);
                 //await _context.Historicos.AddAsync(historico, cancellationToken);

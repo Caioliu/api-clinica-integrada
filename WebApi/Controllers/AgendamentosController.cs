@@ -5,8 +5,6 @@ using Application.Handlers.Agendamentos.Commands.Update;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentoById;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentos;
 using Application.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -33,11 +31,15 @@ namespace WebApi.Controllers
         //[Authorize(Roles = "atendente")]
         [HttpPost("consulta-triagem")]
         public async Task<ActionResult> Create([FromBody] CreateAgendamentoCommand command) {
-            var result = await Mediator.Send(command);
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(command);
+                    if (!result.Succeeded) {
+                        return BadRequest(result);
+                    }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
         //[Authorize(Roles = "atendente")]

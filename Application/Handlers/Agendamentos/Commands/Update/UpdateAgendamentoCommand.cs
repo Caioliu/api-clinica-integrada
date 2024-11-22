@@ -38,8 +38,8 @@ namespace Application.Handlers.Agendamentos.Commands.Update
                     throw new Exception(nameof(Agendamento));
                 }
 
-                entidadeAlterado.DataHoraInicio = request.DataHora;
-                //entidadeAlterado.DataHoraFim = request.DataHoraFim;
+                entidadeAlterado.DataHoraInicio = request.DataHoraInicio;
+                entidadeAlterado.DataHoraFim = request.DataHoraFim;
                 entidadeAlterado.Tipo = request.Tipo;
                 entidadeAlterado.Status = request.Status;
                 entidadeAlterado.PacienteId = request.PacienteId;

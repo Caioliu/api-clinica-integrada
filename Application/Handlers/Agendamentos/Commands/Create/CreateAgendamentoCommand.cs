@@ -28,9 +28,16 @@ namespace Application.Handlers.Agendamentos.Commands.Create
 
         public async Task<ServiceResult> Handle(CreateAgendamentoCommand request, CancellationToken cancellationToken) {
             try {
+
+                await ValidarEntidadesAsync(request.Agendamento.SalaId, request.Consulta.EquipeId, request.Agendamento.PacienteId, cancellationToken);
+
+                if (request.Agendamento.SalaId.HasValue) {
+                    await VerificarDisponibilidadeSala(request.Agendamento.SalaId, request.Agendamento.DataHoraInicio, request.Agendamento.DataHoraFim, cancellationToken);
+                }
+
                 var agendamentoEntity = new Agendamento {
-                    DataHoraInicio = request.Agendamento.DataHora,
-                    //DataHoraFim = request.Agendamento.DataHoraFim,
+                    DataHoraInicio = request.Agendamento.DataHoraInicio,
+                    DataHoraFim = request.Agendamento.DataHoraFim,
                     Tipo = request.Agendamento.Tipo,
                     Status = request.Agendamento.Status,
                     PacienteId = request.Agendamento.PacienteId,
@@ -60,6 +67,47 @@ namespace Application.Handlers.Agendamentos.Commands.Create
                 await _context.RollBack();
                 throw;
             }
+        }
+
+        private async Task VerificarDisponibilidadeSala(Guid? SalaId, DateTime DataHoraInicio, DateTime DataHoraFim, CancellationToken cancellationToken) {
+            // Validar se o novo agendamento tem interseção com algum existente na mesma sala
+            var agendamentos = await _context.Agendamentos
+                .Where(a => a.SalaId == SalaId &&
+                            a.DataHoraInicio < DataHoraFim && // Começa antes do término do novo agendamento
+                            a.DataHoraFim > DataHoraInicio)   // Termina após o início do novo agendamento
+                .ToListAsync(cancellationToken);
+
+            if (agendamentos.Any()) {
+                throw new Exception("Sala não disponível para o horário informado.");
+            }
+        }
+
+
+        public async Task<ServiceResult> ValidarEntidadesAsync(
+            Guid? salaId,
+            Guid? equipeId,
+            Guid pacienteId,
+            CancellationToken cancellationToken) {
+                if (salaId.HasValue) {
+                    var sala = await _context.Salas.FirstOrDefaultAsync(s => s.Id == salaId, cancellationToken);
+                    if (sala == null) {
+                        return ServiceResult.Failed(ServiceError.CustomMessage("Sala não existe"));
+                    }
+                }
+
+                if (equipeId.HasValue) {
+                    var equipe = await _context.Equipes.FirstOrDefaultAsync(e => e.Id == equipeId, cancellationToken);
+                    if (equipe == null) {
+                        return ServiceResult.Failed(ServiceError.CustomMessage("Equipe não existe"));
+                    }
+                }
+
+                var paciente = await _context.Pacientes.FirstOrDefaultAsync(p => p.Id == pacienteId, cancellationToken);
+                if (paciente == null) {
+                    return ServiceResult.Failed(ServiceError.CustomMessage("Paciente não existe"));
+                }
+
+            return ServiceResult.Success("Ok");
         }
 
         private async Task AtualizarStatusListaEspera(Guid pacienteId, CancellationToken cancellationToken) {

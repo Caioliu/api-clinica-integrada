@@ -29,6 +29,7 @@ namespace Application.Handlers.Consultas.Queries.GetConsultas
         public async Task<ServiceResult<PaginatedList<ConsultaDTO>>> Handle(GetConsultasQuery request, CancellationToken cancellationToken) {
 
             var mapper = new GridifyMapper<Consulta>()
+                .AddMap("PacienteNome", c => c.Agendamento.Paciente.Nome)
                 .GenerateMappings();
 
             var gridifyQueryable = _context.Consultas

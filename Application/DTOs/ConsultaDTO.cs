@@ -10,8 +10,8 @@ namespace Application.DTOs
         public string Observacao { get; set; }
         public DateTime? DataHoraInicio { get; set; }
         public DateTime? DataHoraFim { get; set; }
-        public Especialidade Especialidade { get; set; }
-        public ConsultaStatus Status { get; set; }
+        public string Especialidade { get; set; }
+        public string Status { get; set; }
         public Guid AgendamentoId { get; set; }
         public Guid EquipeId { get; set; }
 

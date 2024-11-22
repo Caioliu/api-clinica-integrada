@@ -11,6 +11,6 @@ namespace Application.Handlers.Agendamentos.Commands
     {
         public string Observacao { get; set; }
         public Especialidade Especialidade { get; set; }
-        public Guid EquipeId { get; set; }
+        public Guid? EquipeId { get; set; }
     }
 }
