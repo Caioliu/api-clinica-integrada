@@ -3,7 +3,9 @@ using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Pacientes.Commands.Create
 {
@@ -45,11 +47,13 @@ namespace Application.Handlers.Pacientes.Commands.Create
                 await _context.Pacientes.AddAsync(entity, cancellationToken);
 
                 if (request.ListaEspera != null) {
+
                     var listaEsperaEntity = new ListaEspera {
                         DataEntrada = _dateTime.Now,
                         DataSaida = request.ListaEspera.DataSaida,
-                        Status = request.ListaEspera.Status,
+                        Status = ListaStatus.Aguardando,
                         Prioridade = request.ListaEspera.Prioridade,
+                        Especialidade = request.ListaEspera.Especialidade,
                         PacienteId = entity.Id
                     };
 

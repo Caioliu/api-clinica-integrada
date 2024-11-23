@@ -15,13 +15,13 @@ namespace WebApi.Controllers
     [ApiController]
     public class EquipesController : ApiControllerBase
     {
-        //Authorize(Roles = "atendente")
+        [Authorize(Roles = "atendente")]
         [HttpGet]
         public async Task<ActionResult<PaginatedList<ListEquipeDTO>>> Get([FromQuery] GetEquipesQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
-        //Authorize(Roles = "atendente")
+        [Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
         public async Task<ActionResult<EquipeDTO>> GetById(Guid id) {
             var result = await Mediator.Send(new GetEquipeByIdQuery { Id = id });
@@ -31,7 +31,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateEquipe(CreateEquipeCommand command) {
             var result = await Mediator.Send(command);
@@ -43,7 +43,7 @@ namespace WebApi.Controllers
 
 
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPut("{id}/inserir-profissional/{profissionalId}")]
         public async Task<ActionResult> InserirProfissional(Guid id, Guid profissionalId) {
             var result = await Mediator.Send(new InserirProfissionalEquipeCommand { EquipeId = id, ProfissionalId = profissionalId });
@@ -53,7 +53,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPut("{id}/remover-profissional/{profissionalId}")]
         public async Task<ActionResult> RemoverProfissional(Guid id, Guid profissionalId) {
             var result = await Mediator.Send(new RemoverProfissionalEquipeCommand { EquipeId = id, ProfissionalId = profissionalId });
@@ -63,7 +63,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id) {
             var result = await Mediator.Send(new DeleteEquipeCommand { Id = id });

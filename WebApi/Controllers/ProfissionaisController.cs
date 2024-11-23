@@ -12,32 +12,32 @@ namespace WebApi.Controllers
     [ApiController]
     public class ProfissionaisController : ApiControllerBase
     {
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpGet]
         public async Task<ActionResult> Get([FromQuery] GetProfissionaisQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateProfissionalCommand command) {
             return Ok(await Mediator.Send(command));
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(Guid id) {
             return Ok(await Mediator.Send(new GetProfissionalByIdQuery { Id = id }));
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(Guid id, [FromBody] UpdateProfissionalCommand command) {
             command.Id = id;
             return Ok(await Mediator.Send(command));
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id) {
             var result = await Mediator.Send(new DeleteProfissionalCommand { Id = id });

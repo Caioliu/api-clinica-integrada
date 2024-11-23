@@ -26,15 +26,15 @@ namespace WebApi.Controllers
 
         }
 
+        [Authorize(Roles = "atendente")]
         [HttpGet]
-        //[Authorize(Roles = "atendente")]
         public async Task<ActionResult<PaginatedList<ListUsuarioDTO>>> Get([FromQuery] GetUsuariosQuery query) {
             return Ok(await _mediator.Send(query));
         }
 
 
-        [HttpGet("informacao")]
         [Authorize]
+        [HttpGet("informacao")]
         public async Task<ActionResult<UsuarioInfoDTO>> GetUsuario() {
             var usuario = await _usuarioService.GetById(_usuarioLogado.Id);
 

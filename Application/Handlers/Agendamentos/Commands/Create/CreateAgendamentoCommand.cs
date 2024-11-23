@@ -74,7 +74,8 @@ namespace Application.Handlers.Agendamentos.Commands.Create
             var agendamentos = await _context.Agendamentos
                 .Where(a => a.SalaId == SalaId &&
                             a.DataHoraInicio < DataHoraFim && // Começa antes do término do novo agendamento
-                            a.DataHoraFim > DataHoraInicio)   // Termina após o início do novo agendamento
+                            a.DataHoraFim > DataHoraInicio && // Termina após o início do novo agendamento
+                            !a.IsDeleted) // Apenas agendamentos não deletados
                 .ToListAsync(cancellationToken);
 
             if (agendamentos.Any()) {

@@ -1,17 +1,19 @@
 ﻿using Application.DTOs;
-using Application.Handlers.ListaEsperaEntries.Commands;
 using Application.Interfaces;
+using Application.Models;
 using AutoMapper;
+using Domain.Enums;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.ListaEsperaEntries.Commands.Create
 {
-    public class CreateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ListaEsperaEntryDTO>
+    public class CreateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ServiceResult>
     {
-
+        public Guid PacienteId { get; set; }
     }
 
-    public class CreateListaEsperaEntryCommandHandler : IRequestHandler<CreateListaEsperaEntryCommand, ListaEsperaEntryDTO>
+    public class CreateListaEsperaEntryCommandHandler : IRequestHandler<CreateListaEsperaEntryCommand, ServiceResult>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -21,19 +23,35 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Create
             _mapper = mapper;
         }
 
-        public async Task<ListaEsperaEntryDTO> Handle(CreateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult> Handle(CreateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
             var entity = new Domain.Entities.ListaEspera {
                 DataEntrada = request.DataEntrada,
                 DataSaida = request.DataSaida,
                 Status = request.Status,
                 Prioridade = request.Prioridade,
-                PacienteId = request.PacienteId
+                PacienteId = request.PacienteId,
+                Especialidade = request.Especialidade
             };
+
+            await ValidarListaEsperaAsync(request.PacienteId, request.Especialidade, cancellationToken);
 
             await _context.ListaEspera.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<ListaEsperaEntryDTO>(entity);
+            var result = _mapper.Map<ListaEsperaEntryDTO>(entity);
+
+            return ServiceResult.Success(result);
+        }
+
+        private async Task ValidarListaEsperaAsync(Guid id, Especialidade especialidade, CancellationToken cancellationToken) {
+            var listaEspera = await _context.ListaEspera.FirstOrDefaultAsync(
+                x => x.PacienteId == id &&
+                x.Especialidade == especialidade &&
+                x.Status == ListaStatus.Aguardando
+                , cancellationToken);
+            if (listaEspera != null) {
+                throw new Exception($"Paciente tem um registro ativo na lista de espera de {especialidade}.");
+            }
         }
     }
 

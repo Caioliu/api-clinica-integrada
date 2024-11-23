@@ -10,7 +10,7 @@ namespace Domain.Entities
         public int Idade { get; set; }
         public string? NomeResponsavel { get; set; }
         public string? ParentescoResponsavel { get; set; }
-        public string? Observacao { get; set; }
+        public string? Observacao { get; set; }        
         public bool RecebeuAlta { get; set; }
 
         //Relacionamentos

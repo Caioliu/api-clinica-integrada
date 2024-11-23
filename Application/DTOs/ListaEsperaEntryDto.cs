@@ -11,6 +11,7 @@ namespace Application.DTOs
         public DateTime? DataSaida { get; set; }
         public string Status { get; set; }
         public string Prioridade { get; set; }
+        public string Especialidade { get; set; }
         public Guid PacienteId { get; set; }
 
         public void Mapping(AutoMapper.Profile profile) {
@@ -21,6 +22,7 @@ namespace Application.DTOs
                 .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status))
                 .ForMember(d => d.Prioridade, opt => opt.MapFrom(s => s.Prioridade))
                 .ForMember(d => d.PacienteId, opt => opt.MapFrom(s => s.PacienteId))
+                .ForMember(d => d.Especialidade, opt => opt.MapFrom(s => s.Especialidade.ToString()))
                 ;
         }
     }

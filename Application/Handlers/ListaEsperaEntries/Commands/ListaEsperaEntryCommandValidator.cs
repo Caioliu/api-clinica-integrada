@@ -12,6 +12,8 @@ namespace Application.Handlers.ListaEsperaEntries.Commands
 
             RuleFor(v => v.PacienteId)
                 .NotEmpty().WithMessage("Paciente é obrigatório.");
+            //RuleFor(v => v.Especialidade)
+            //    .NotEmpty().WithMessage("Especialidade é obrigatória.");    
 
         }
     }

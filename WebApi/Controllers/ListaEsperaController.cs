@@ -13,33 +13,40 @@ namespace WebApi.Controllers
     [ApiController]
     public class ListaEsperaController : ApiControllerBase
     {
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpGet]
         public async Task<ActionResult<PaginatedList<ListaEsperaEntryDTO>>> Get([FromQuery] GetListaEsperaEntriesQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ListaEsperaEntryDTO>> GetById(Guid id) {
             return Ok(await Mediator.Send(new GetListaEsperaEntryByIdQuery { Id = id }));
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPost("{pacienteId}")]
-        public async Task<ActionResult<ListaEsperaEntryDTO>> Create(CreateListaEsperaEntryCommand command, Guid pacienteId) {
-            command.PacienteId = pacienteId;
-            return Ok(await Mediator.Send(command));
+        public async Task<ActionResult<ListaEsperaEntryDTO>> Create(CreateListaEsperaEntryCommand command) {
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPut("{id}")]
         public async Task<ActionResult<ListaEsperaEntryDTO>> Update(Guid id, UpdateListaEsperaEntryCommand command) {
             command.Id = id;
             return Ok(await Mediator.Send(command));
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<string>> Delete(Guid id) {
             return Ok(await Mediator.Send(new DeleteListaEsperaEntryCommand { Id = id }));

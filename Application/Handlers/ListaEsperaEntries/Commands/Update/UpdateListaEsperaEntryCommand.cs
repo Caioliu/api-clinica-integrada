@@ -35,6 +35,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Update
             entity.Status = request.Status;
             entity.Prioridade = request.Prioridade;
             entity.PacienteId = request.PacienteId;
+            entity.Especialidade = request.Especialidade;
 
             await _context.SaveChangesAsync(cancellationToken);
 

@@ -13,6 +13,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands
         public DateTime DataEntrada { get; set; }
         public DateTime? DataSaida { get; set; }
         public ListaStatus Status { get; set; }
+        public Especialidade Especialidade { get; set; }
         public Prioridade Prioridade { get; set; }
         [JsonIgnore]
         public Guid PacienteId { get; set; }

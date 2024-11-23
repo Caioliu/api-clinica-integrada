@@ -5,6 +5,7 @@ using Application.Handlers.Agendamentos.Commands.Update;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentoById;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentos;
 using Application.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -13,7 +14,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class AgendamentosController : ApiControllerBase
     {
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpGet]
         public async Task<ActionResult<PaginatedList<AgendamentoDTO>>> Get([FromQuery] GetAgendamentosQuery query) {
             return Ok(await Mediator.Send(query));
@@ -28,7 +29,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPost("consulta-triagem")]
         public async Task<ActionResult> Create([FromBody] CreateAgendamentoCommand command) {
             try {
@@ -42,7 +43,7 @@ namespace WebApi.Controllers
             }
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id) {
             var result = await Mediator.Send(new DeleteAgendamentoCommand { Id = id });
@@ -52,7 +53,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPut("{id}")]
         public async Task<ActionResult<AgendamentoDTO>> Update(Guid id, [FromBody] UpdateAgendamentoCommand command) {
             command.Id = id;

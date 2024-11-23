@@ -14,12 +14,13 @@ namespace WebApi.Controllers
     [ApiController]
     public class SalasController : ApiControllerBase
     {
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpGet]
         public async Task<ActionResult<PaginatedList<SalaDTO>>> Get([FromQuery] GetSalasQuery query) {
             return Ok(await Mediator.Send(query));
         }
 
+        [Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
         public async Task<ActionResult<SalaDTO>> GetById(Guid id) {
             var result = await Mediator.Send(new GetSalaByIdQuery { Id = id });
@@ -29,7 +30,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        //[Authorize(Roles = "atendente")]
+        [Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateSalaCommand command) {
             var result = await Mediator.Send(command);
@@ -39,6 +40,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "atendente")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id) {
             var result = await Mediator.Send(new DeleteSalaCommand { Id = id });
@@ -48,6 +50,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "atendente")]
         [HttpPut("{id}")]
         public async Task<ActionResult<SalaDTO>> Update(Guid id, [FromBody] UpdateSalaCommand command) {
             command.Id = id;

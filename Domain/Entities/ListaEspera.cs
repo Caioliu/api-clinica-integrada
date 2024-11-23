@@ -16,7 +16,7 @@ namespace Domain.Entities
         public DateTime? DataSaida { get; set; }
         public ListaStatus Status { get; set; }
         public Prioridade Prioridade { get; set; }
-
+        public Especialidade Especialidade { get; set; }
         //Relacionamentos
         public Guid PacienteId { get; set; }
         public Paciente Paciente { get; set; }
