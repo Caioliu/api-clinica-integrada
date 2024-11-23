@@ -6,6 +6,7 @@ using Application.Handlers.Consultas.Commands.Update.IniciarTriagem;
 using Application.Handlers.Consultas.Commands.Update.UpdateConsulta;
 using Application.Handlers.Consultas.Commands.Update.UpdateDisponibilidadeSala;
 using Application.Handlers.Consultas.Queries.GetConsultaById;
+using Application.Handlers.Consultas.Queries.GetConsultaRelatorio;
 using Application.Handlers.Consultas.Queries.GetConsultas;
 using Application.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,16 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ConsultaDTO>> GetById(Guid id) {
             var result = await Mediator.Send(new GetConsultaByIdQuery { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "atendente")]
+        [HttpGet("{id}/relatorio")]
+        public async Task<ActionResult<RelatorioConsultaDTO>> GetRelatorio(Guid id) {
+            var result = await Mediator.Send(new GetConsultaRelatorioQuery { Id = id });
             if (!result.Succeeded) {
                 return BadRequest(result);
             }
