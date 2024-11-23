@@ -1,3 +1,4 @@
+using Application.DTOs;
 using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
@@ -8,12 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Agendamentos.Commands.Create
 {
-    public class CreateAgendamentoCommand : IRequest<ServiceResult> {
+    public class CreateAgendamentoCommand : IRequest<ServiceResult<CreateAgendamentoDto>> {
         public AgendamentoCommand Agendamento { get; set; }
         public ConsultaReducedCommand Consulta { get; set; }
     }
 
-    public class CreateAgendamentoCommandHandler : IRequestHandler<CreateAgendamentoCommand, ServiceResult> {
+    public class CreateAgendamentoCommandHandler : IRequestHandler<CreateAgendamentoCommand, ServiceResult<CreateAgendamentoDto>>
+    {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
@@ -26,7 +28,7 @@ namespace Application.Handlers.Agendamentos.Commands.Create
 
         }
 
-        public async Task<ServiceResult> Handle(CreateAgendamentoCommand request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult<CreateAgendamentoDto>> Handle(CreateAgendamentoCommand request, CancellationToken cancellationToken) {
             try {
 
                 await ValidarEntidadesAsync(request.Agendamento.SalaId, request.Consulta.EquipeId, request.Agendamento.PacienteId, cancellationToken);
@@ -59,10 +61,14 @@ namespace Application.Handlers.Agendamentos.Commands.Create
 
                 await _context.Agendamentos.AddAsync(agendamentoEntity, cancellationToken);
                 await _context.Consultas.AddAsync(consultaEntity, cancellationToken);
-
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return ServiceResult.Success("Ok");
+                var result = new CreateAgendamentoDto {
+                    AgendamentoId = agendamentoEntity.Id,
+                    ConsultaId = consultaEntity.Id
+                };
+
+                return ServiceResult.Success(result);
             } catch (Exception ex) {
                 await _context.RollBack();
                 throw;

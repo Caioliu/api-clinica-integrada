@@ -32,7 +32,8 @@ namespace WebApi.Controllers
 
         [Authorize(Roles = "atendente")]
         [HttpPost("{pacienteId}")]
-        public async Task<ActionResult<ListaEsperaEntryDTO>> Create(CreateListaEsperaEntryCommand command) {
+        public async Task<ActionResult<ListaEsperaEntryDTO>> Create(Guid pacienteId, CreateListaEsperaEntryCommand command) {
+            command.PacienteId = pacienteId;
             try {
                 var result = await Mediator.Send(command);
                 if (!result.Succeeded) {

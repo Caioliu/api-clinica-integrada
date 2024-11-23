@@ -10,7 +10,6 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Create
 {
     public class CreateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ServiceResult>
     {
-        public Guid PacienteId { get; set; }
     }
 
     public class CreateListaEsperaEntryCommandHandler : IRequestHandler<CreateListaEsperaEntryCommand, ServiceResult>
@@ -24,6 +23,11 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Create
         }
 
         public async Task<ServiceResult> Handle(CreateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
+            var paciente = await _context.Pacientes.FindAsync(request.PacienteId);
+            if (paciente == null) {
+                throw new Exception("Paciente não encontrado.");
+            }
+
             var entity = new Domain.Entities.ListaEspera {
                 DataEntrada = request.DataEntrada,
                 DataSaida = request.DataSaida,
@@ -40,7 +44,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Create
 
             var result = _mapper.Map<ListaEsperaEntryDTO>(entity);
 
-            return ServiceResult.Success(result);
+            return ServiceResult.Success(result.Id);
         }
 
         private async Task ValidarListaEsperaAsync(Guid id, Especialidade especialidade, CancellationToken cancellationToken) {

@@ -1,4 +1,5 @@
-﻿using Application.Handlers.ListaEsperaEntries.Commands;
+﻿using Application.DTOs;
+using Application.Handlers.ListaEsperaEntries.Commands;
 using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
@@ -12,7 +13,7 @@ namespace Application.Handlers.Pacientes.Commands.Create
     public class CreatePacienteCommand : IRequest<ServiceResult>
     {
         public PacienteCommand Paciente { get; set; }
-        public ListaEsperaEntryCommand ListaEspera { get; set; }
+        public ListaEsperaEntryCommand? ListaEspera { get; set; }
     }
 
     public class CreatePacienteCommandHandler : IRequestHandler<CreatePacienteCommand, ServiceResult>
@@ -44,6 +45,11 @@ namespace Application.Handlers.Pacientes.Commands.Create
                     RecebeuAlta = request.Paciente.RecebeuAlta
                 };
 
+                var result = new CreatePacienteDTO {
+                    PacienteId = entity.Id,
+                    ListaEsperaId = null
+                };
+
                 await _context.Pacientes.AddAsync(entity, cancellationToken);
 
                 if (request.ListaEspera != null) {
@@ -57,12 +63,13 @@ namespace Application.Handlers.Pacientes.Commands.Create
                         PacienteId = entity.Id
                     };
 
+                    result.ListaEsperaId = listaEsperaEntity.Id;
                     await _context.ListaEspera.AddAsync(listaEsperaEntity, cancellationToken);
                 }
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return ServiceResult.Success("Ok");
+                return ServiceResult.Success(result);
             } catch (Exception ex) {
                 await _context.RollBack();
                 throw;

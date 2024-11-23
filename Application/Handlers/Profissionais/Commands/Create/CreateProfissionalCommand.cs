@@ -39,7 +39,7 @@ namespace Application.Handlers.Profissionais.Commands.Create
                 await _context.Profissionais.AddAsync(entity, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return ServiceResult.Success("Ok");
+                return ServiceResult.Success(entity.Id);
             } catch (Exception ex) {
                 await _context.RollBack();
                 throw;
