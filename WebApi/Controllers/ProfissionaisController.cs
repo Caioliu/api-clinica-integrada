@@ -1,4 +1,5 @@
-﻿using Application.Handlers.Profissionais.Commands.Create;
+﻿using Application.Handlers.Agendamentos.Queries.GetAgendamentoById;
+using Application.Handlers.Profissionais.Commands.Create;
 using Application.Handlers.Profissionais.Commands.Delete;
 using Application.Handlers.Profissionais.Commands.Update;
 using Application.Handlers.Profissionais.Queries.GetProfissionais;
@@ -21,20 +22,40 @@ namespace WebApi.Controllers
         [Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateProfissionalCommand command) {
-            return Ok(await Mediator.Send(command));
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(Guid id) {
-            return Ok(await Mediator.Send(new GetProfissionalByIdQuery { Id = id }));
+            var result = await Mediator.Send(new GetProfissionalByIdQuery { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(Guid id, [FromBody] UpdateProfissionalCommand command) {
             command.Id = id;
-            return Ok(await Mediator.Send(command));
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize(Roles = "atendente")]

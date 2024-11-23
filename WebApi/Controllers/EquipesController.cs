@@ -6,7 +6,6 @@ using Application.Handlers.Equipes.Queries.GetEquipeById;
 using Application.Handlers.Equipes.Queries.GetEquipes;
 using Application.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -34,33 +33,43 @@ namespace WebApi.Controllers
         [Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateEquipe(CreateEquipeCommand command) {
-            var result = await Mediator.Send(command);
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
-
-
 
         [Authorize(Roles = "atendente")]
         [HttpPut("{id}/inserir-profissional/{profissionalId}")]
         public async Task<ActionResult> InserirProfissional(Guid id, Guid profissionalId) {
-            var result = await Mediator.Send(new InserirProfissionalEquipeCommand { EquipeId = id, ProfissionalId = profissionalId });
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(new InserirProfissionalEquipeCommand { EquipeId = id, ProfissionalId = profissionalId });
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]
         [HttpPut("{id}/remover-profissional/{profissionalId}")]
         public async Task<ActionResult> RemoverProfissional(Guid id, Guid profissionalId) {
-            var result = await Mediator.Send(new RemoverProfissionalEquipeCommand { EquipeId = id, ProfissionalId = profissionalId });
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(new RemoverProfissionalEquipeCommand { EquipeId = id, ProfissionalId = profissionalId });
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]

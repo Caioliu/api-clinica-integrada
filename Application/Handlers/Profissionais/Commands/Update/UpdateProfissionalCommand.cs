@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Application.Models;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -7,13 +8,13 @@ using System.Text.Json.Serialization;
 
 namespace Application.Handlers.Profissionais.Commands.Update
 {
-    public class UpdateProfissionalCommand : ProfissionalCommand, IRequest<ProfissionalDTO>
+    public class UpdateProfissionalCommand : ProfissionalCommand, IRequest<ServiceResult<ProfissionalDTO>>
     {
         [JsonIgnore]
         public Guid Id { get; set; }
     }
 
-    public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, ProfissionalDTO>
+    public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, ServiceResult<ProfissionalDTO>>
     {
 
         private readonly ISender _mediator;
@@ -29,7 +30,7 @@ namespace Application.Handlers.Profissionais.Commands.Update
             _mapper = mapper;
         }
 
-        public async Task<ProfissionalDTO> Handle(UpdateProfissionalCommand request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult<ProfissionalDTO>> Handle(UpdateProfissionalCommand request, CancellationToken cancellationToken) {
             try {
                 var entidadeAlterado = await _context.Profissionais.FindAsync(request.Id);
                 //var entidadeOriginal = (Profissional)entidadeAlterado.Clone();
@@ -50,7 +51,7 @@ namespace Application.Handlers.Profissionais.Commands.Update
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var result = _mapper.Map<ProfissionalDTO>(entidadeAlterado);
+                var result = _mapper.Map<ServiceResult<ProfissionalDTO>>(entidadeAlterado);
 
                 return result;
             } catch (Exception ex) {

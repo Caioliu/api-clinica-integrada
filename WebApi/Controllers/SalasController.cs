@@ -33,11 +33,15 @@ namespace WebApi.Controllers
         [Authorize(Roles = "atendente")]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateSalaCommand command) {
-            var result = await Mediator.Send(command);
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]
@@ -54,11 +58,15 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<SalaDTO>> Update(Guid id, [FromBody] UpdateSalaCommand command) {
             command.Id = id;
-            var result = await Mediator.Send(command);
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
     }
 }

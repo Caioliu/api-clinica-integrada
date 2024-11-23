@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Handlers.Agendamentos.Queries.GetAgendamentoById;
 using Application.Handlers.Consultas.Queries.GetConsultaById;
 using Application.Handlers.Pacientes.Commands.Create;
 using Application.Handlers.Pacientes.Commands.Delete;
@@ -24,7 +25,11 @@ namespace WebApi.Controllers
         [Authorize(Roles = "atendente")]
         [HttpGet("{id}")]
         public async Task<ActionResult<PacienteDTO>> GetById(Guid id) {
-            return Ok(await Mediator.Send(new GetPacienteByIdQuery { Id = id }));
+            var result = await Mediator.Send(new GetPacienteByIdQuery { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]
@@ -45,8 +50,15 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<PacienteDTO>> Update(Guid id, [FromBody] UpdatePacienteCommand command) {
             command.Id = id;
-            return await Mediator.Send(command);
-
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize(Roles = "atendente")]

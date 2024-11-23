@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Application.Models;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -7,13 +8,13 @@ using System.Text.Json.Serialization;
 
 namespace Application.Handlers.Pacientes.Commands.Update
 {
-    public class UpdatePacienteCommand : PacienteCommand, IRequest<PacienteDTO>
+    public class UpdatePacienteCommand : PacienteCommand, IRequest<ServiceResult<PacienteDTO>>
     {
         [JsonIgnore]
         public Guid Id { get; set; }
     }
 
-    public class UpdatePacienteCommandHandler : IRequestHandler<UpdatePacienteCommand, PacienteDTO>
+    public class UpdatePacienteCommandHandler : IRequestHandler<UpdatePacienteCommand, ServiceResult<PacienteDTO>>
     {
 
         private readonly ISender _mediator;
@@ -29,7 +30,7 @@ namespace Application.Handlers.Pacientes.Commands.Update
             _context = context;
             _mapper = mapper;
         }
-        public async Task<PacienteDTO> Handle(UpdatePacienteCommand request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult<PacienteDTO>> Handle(UpdatePacienteCommand request, CancellationToken cancellationToken) {
             try {
                 var entidadeAlterado = await _context.Pacientes.FindAsync(request.Id);
                 //var entidadeOriginal = (Paciente)entidadeAlterado.Clone();
@@ -51,7 +52,7 @@ namespace Application.Handlers.Pacientes.Commands.Update
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var result = _mapper.Map<PacienteDTO>(entidadeAlterado);
+                var result = _mapper.Map<ServiceResult<PacienteDTO>>(entidadeAlterado);
 
                 return result;
             } catch (Exception ex) {

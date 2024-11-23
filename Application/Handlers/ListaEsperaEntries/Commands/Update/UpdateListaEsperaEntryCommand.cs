@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Application.Models;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -7,13 +8,13 @@ using System.Text.Json.Serialization;
 
 namespace Application.Handlers.ListaEsperaEntries.Commands.Update
 {
-    public class UpdateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ListaEsperaEntryDTO>
+    public class UpdateListaEsperaEntryCommand : ListaEsperaEntryCommand, IRequest<ServiceResult<ListaEsperaEntryDTO>>
     {
         [JsonIgnore]
         public Guid Id { get; set; }
     }
 
-    public class UpdateListaEsperaEntryCommandHandler : IRequestHandler<UpdateListaEsperaEntryCommand, ListaEsperaEntryDTO>
+    public class UpdateListaEsperaEntryCommandHandler : IRequestHandler<UpdateListaEsperaEntryCommand, ServiceResult<ListaEsperaEntryDTO>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -23,7 +24,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Update
             _mapper = mapper;
         }
 
-        public async Task<ListaEsperaEntryDTO> Handle(UpdateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
+        public async Task<ServiceResult<ListaEsperaEntryDTO>> Handle(UpdateListaEsperaEntryCommand request, CancellationToken cancellationToken) {
             var entity = await _context.ListaEspera.FindAsync(request.Id);
 
             if (entity == null) {
@@ -39,7 +40,7 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Update
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<ListaEsperaEntryDTO>(entity);
+            return _mapper.Map<ServiceResult<ListaEsperaEntryDTO>>(entity);
         }
     }
 

@@ -36,42 +36,59 @@ namespace WebApi.Controllers
         [Authorize(Roles = "atendente")]
         [HttpPut("{id}/triagem/iniciar")]
         public async Task<ActionResult> IniciarTriagem(Guid id) {
-            var result = await Mediator.Send(new UpdateIniciarTriagemCommand { ConsultaId = id });
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(new UpdateIniciarTriagemCommand { ConsultaId = id });
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
+
         }
 
         [Authorize(Roles = "atendente")]
         [HttpPut("{id}/triagem/finalizar")]
         public async Task<ActionResult> FinalizarTriagem(Guid id) {
-            var result = await Mediator.Send(new UpdateFinalizarTriagemCommand { ConsultaId = id });
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(new UpdateFinalizarTriagemCommand { ConsultaId = id });
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]
         [HttpPut("{id}/iniciar")]
         public async Task<ActionResult> IniciarConsulta(Guid id) 
         {
-            var result = await Mediator.Send(new UpdateIniciarConsultaCommand { ConsultaId = id });
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(new UpdateIniciarConsultaCommand { ConsultaId = id });
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]
         [HttpPut("{id}/finalizar")]
         public async Task<ActionResult> FinalizarConsulta(Guid id) {
-            var result = await Mediator.Send(new UpdateFinalizarConsultaCommand { ConsultaId = id });
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(new UpdateFinalizarConsultaCommand { ConsultaId = id });
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
         [Authorize(Roles = "atendente")]
@@ -88,11 +105,15 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ConsultaDTO>> Update(Guid id, [FromBody] UpdateConsultaCommand command) {
             command.Id = id;
-            var result = await Mediator.Send(command);
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
     }

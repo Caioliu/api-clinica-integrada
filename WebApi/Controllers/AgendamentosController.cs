@@ -57,11 +57,15 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<AgendamentoDTO>> Update(Guid id, [FromBody] UpdateAgendamentoCommand command) {
             command.Id = id;
-            var result = await Mediator.Send(command);
-            if (!result.Succeeded) {
-                return BadRequest(result);
+            try {
+                var result = await Mediator.Send(command);
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
-            return Ok(result);
         }
 
 
