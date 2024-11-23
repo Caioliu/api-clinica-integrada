@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+using Application.DTOs;
 using Application.Handlers.Consultas.Commands.Delete;
 using Application.Handlers.Consultas.Commands.Update.FinalizarConsulta;
 using Application.Handlers.Consultas.Commands.Update.FinalizarTriagem;

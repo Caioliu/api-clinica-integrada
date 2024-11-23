@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+using Application.DTOs;
 using Application.Handlers.Agendamentos.Commands.Create;
 using Application.Handlers.Agendamentos.Commands.Delete;
 using Application.Handlers.Agendamentos.Commands.Update;

@@ -1,4 +1,4 @@
-﻿using Application.Mappings;
+using Application.Mappings;
 using Domain.Entities;
 using Domain.Enums;
 using System;
