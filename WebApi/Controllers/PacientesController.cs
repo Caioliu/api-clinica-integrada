@@ -5,8 +5,10 @@ using Application.Handlers.Pacientes.Commands.Create;
 using Application.Handlers.Pacientes.Commands.Delete;
 using Application.Handlers.Pacientes.Commands.Update;
 using Application.Handlers.Pacientes.Queries.GetPacienteById;
+using Application.Handlers.Pacientes.Queries.GetPacienteEtapaById;
 using Application.Handlers.Pacientes.Queries.GetPacientes;
 using Application.Models;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +28,18 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PacienteDTO>> GetById(Guid id) {
             var result = await Mediator.Send(new GetPacienteByIdQuery { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        // GET: api/pacientes/{id}/localizar-etapa
+        // essa requisição deve retornar a etapa atual do paciente no sistema
+        [Authorize(Roles = "atendente")]
+        [HttpGet("{id}/localizar-etapa")]
+        public async Task<ActionResult<PacienteEtapa>> GetEtapa(Guid id) {
+            var result = await Mediator.Send(new GetPacienteEtapaByIdQuery { Id = id });
             if (!result.Succeeded) {
                 return BadRequest(result);
             }

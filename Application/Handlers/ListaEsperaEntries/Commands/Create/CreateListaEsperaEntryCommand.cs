@@ -39,6 +39,8 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Create
 
             await ValidarListaEsperaAsync(request.PacienteId, request.Especialidade, cancellationToken);
 
+            paciente.Etapa = PacienteEtapa.ListaEspera;
+
             await _context.ListaEspera.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 

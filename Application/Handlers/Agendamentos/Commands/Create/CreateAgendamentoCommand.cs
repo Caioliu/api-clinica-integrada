@@ -58,6 +58,8 @@ namespace Application.Handlers.Agendamentos.Commands.Create
 
                 //Atualizar Status Lista de Espera para Atendido
                 await AtualizarStatusListaEspera(request.Agendamento.PacienteId, cancellationToken);
+                //Atualizar Etapa Paciente para TriagemConsultaAgendada
+                await AtualizarEtapaPaciente(request.Agendamento.PacienteId, cancellationToken);
 
                 await _context.Agendamentos.AddAsync(agendamentoEntity, cancellationToken);
                 await _context.Consultas.AddAsync(consultaEntity, cancellationToken);
@@ -125,6 +127,15 @@ namespace Application.Handlers.Agendamentos.Commands.Create
 
             if (listaEspera != null) {
                 listaEspera.Status = ListaStatus.Atendido;
+            }
+        }
+
+        private async Task AtualizarEtapaPaciente(Guid pacienteId, CancellationToken cancellationToken) {
+            var paciente = await _context.Pacientes
+                .Where(p => p.Id == pacienteId)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (paciente != null) {
+                paciente.Etapa = PacienteEtapa.TriagemConsulta;
             }
         }
 

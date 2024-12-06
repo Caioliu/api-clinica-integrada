@@ -3,6 +3,7 @@ using Application.Handlers.Equipes.Queries.GetEquipeById;
 using Application.Interfaces;
 using Application.Models;
 using AutoMapper;
+using Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,16 +35,17 @@ namespace Application.Handlers.ListaEsperaEntries.Commands.Delete
 
             try {
                 var entity = await _context.ListaEspera
-                    //.Where(p => !p.IsDeleted)
                     .FirstOrDefaultAsync(p => p.Id == request.Id);
 
                 if (entity == null) {
                     throw new Exception("No se encontró la entrada de lista de espera");
                 }
 
-                //entity.ExcludedAt = _dateTime.Now;
-                //entity.IsDeleted = true;
-                //_context.ListaEspera.Update(entity);
+                var paciente = await _context.Pacientes
+                    .Where(p => p.Id == entity.PacienteId)
+                    .FirstOrDefaultAsync();
+
+                paciente.Etapa = PacienteEtapa.Cadastrado;
 
                 _context.ListaEspera.Remove(entity);
 

@@ -38,7 +38,8 @@ namespace Application.Handlers.Consultas.Commands.Update.UpdateDisponibilidadeSa
                 if (consulta == null) {
                     throw new Exception(nameof(Consulta));
                 }
-
+                var agendamento = await _context.Agendamentos.FindAsync(consulta.AgendamentoId);
+                agendamento.Status = AgendamentoStatus.Concluido;
                 consulta.Status = ConsultaStatus.EmAndamento;
                 consulta.DataHoraInicio = DateTime.Now; // O Horário é registrado
 

@@ -1,10 +1,13 @@
 using Application.DTOs;
 using Application.Handlers.Agendamentos.Commands.Create;
 using Application.Handlers.Agendamentos.Commands.Delete;
+using Application.Handlers.Agendamentos.Commands.Delete.CancelarAgendamento;
 using Application.Handlers.Agendamentos.Commands.Update;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentoById;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentos;
+using Application.Handlers.Agendamentos.Queries.GetAgendamentosDoDiaByEspecialidade;
 using Application.Models;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,6 +50,25 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id) {
             var result = await Mediator.Send(new DeleteAgendamentoCommand { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "atendente")]
+        [HttpDelete("{id}/cancelar")]
+        public async Task<ActionResult> CancelarAgendamento(Guid id) {
+            var result = await Mediator.Send(new CancelarAgendamentoCommand { Id = id });
+            if (!result.Succeeded) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("hoje")]
+        public async Task<ActionResult> GetAgendamentosDoDia([FromQuery] Especialidade especialidade, [FromQuery] AgendamentoTipo tipo) {
+            var result = await Mediator.Send(new GetAgendamentosHojeByEspecialidadeQuery { Especialidade = especialidade, Tipo = tipo });
             if (!result.Succeeded) {
                 return BadRequest(result);
             }

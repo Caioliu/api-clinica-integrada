@@ -42,7 +42,8 @@ namespace Application.Handlers.Pacientes.Commands.Create
                     NomeResponsavel = request.Paciente.NomeResponsavel,
                     ParentescoResponsavel = request.Paciente.ParentescoResponsavel,
                     Observacao = request.Paciente.Observacao,
-                    RecebeuAlta = request.Paciente.RecebeuAlta
+                    RecebeuAlta = request.Paciente.RecebeuAlta,
+                    Etapa = PacienteEtapa.Cadastrado
                 };
 
                 var result = new CreatePacienteDTO {
@@ -53,6 +54,8 @@ namespace Application.Handlers.Pacientes.Commands.Create
                 await _context.Pacientes.AddAsync(entity, cancellationToken);
 
                 if (request.ListaEspera != null) {
+
+                    entity.Etapa = PacienteEtapa.ListaEspera;
 
                     var listaEsperaEntity = new ListaEspera {
                         DataEntrada = _dateTime.Now,

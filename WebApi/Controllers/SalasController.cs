@@ -2,6 +2,7 @@
 using Application.Handlers.Salas.Commands.Create;
 using Application.Handlers.Salas.Commands.Delete;
 using Application.Handlers.Salas.Commands.Update;
+using Application.Handlers.Salas.Commands.Update.BloquearDesbloquearSala;
 using Application.Handlers.Salas.Queries.GetSalaById;
 using Application.Handlers.Salas.Queries.GetSalas;
 using Application.Models;
@@ -68,5 +69,20 @@ namespace WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize(Roles = "atendente")]
+        [HttpPut("{id}/bloquear-desbloquear")]
+        public async Task<ActionResult<SalaDTO>> BloquearDesbloquear(Guid id) {
+            try {
+                var result = await Mediator.Send( new UpdateBloquearDesbloquearSalaCommand { Id = id} );
+                if (!result.Succeeded) {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

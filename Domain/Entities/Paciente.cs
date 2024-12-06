@@ -1,4 +1,5 @@
 using Domain.Common;
+using Domain.Enums;
 
 namespace Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace Domain.Entities
         public string? ParentescoResponsavel { get; set; }
         public string? Observacao { get; set; }        
         public bool RecebeuAlta { get; set; }
+        public PacienteEtapa Etapa { get; set; }
 
         //Relacionamentos
         public IList<ListaEspera> RegistrosListaEspera { get; set; }

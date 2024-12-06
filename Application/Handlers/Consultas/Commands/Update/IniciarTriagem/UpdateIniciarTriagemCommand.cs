@@ -25,6 +25,8 @@ namespace Application.Handlers.Consultas.Commands.Update.IniciarTriagem
                 if (consulta == null) {
                     throw new Exception(nameof(Consulta));
                 }
+                var agendamento = await _context.Agendamentos.FindAsync(consulta.AgendamentoId);
+                agendamento.Status = AgendamentoStatus.Concluido;
                 consulta.Status = ConsultaStatus.Triagem;
 
                 await _context.SaveChangesAsync(cancellationToken);

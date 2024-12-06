@@ -39,6 +39,8 @@ namespace Application.Handlers.Consultas.Commands.Update.FinalizarConsulta
                 consulta.Status = ConsultaStatus.Concluida;
                 consulta.DataHoraFim = DateTime.Now; // O Horário é registrado
 
+                await AtualizarEtapaPaciente(consulta.Agendamento.PacienteId, cancellationToken);
+
                 //Liberar Sala
                 var salaConsulta = await _context.Salas.FirstOrDefaultAsync(x => x.Id == consulta.Agendamento.SalaId);
                 if (salaConsulta != null) {
@@ -50,6 +52,15 @@ namespace Application.Handlers.Consultas.Commands.Update.FinalizarConsulta
             } catch (Exception ex) {
                 throw;
             }
+        }
+
+        private async Task AtualizarEtapaPaciente(Guid pacienteId, CancellationToken cancellationToken) {
+            var paciente = await _context.Pacientes.FirstOrDefaultAsync(x => x.Id == pacienteId, cancellationToken);
+            if (paciente == null) {
+                throw new Exception("Paciente não encontrado.");
+            }
+            paciente.Etapa = PacienteEtapa.ConsultaConcluida;
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 
