@@ -27,11 +27,15 @@ namespace Application.Handlers.Agendamentos.Queries.GetAgendamentos
 
 
             var mapper = new GridifyMapper<Agendamento>()
-                .GenerateMappings()
                 .AddMap("PacienteNome", agendamento => agendamento.Paciente.Nome)
+                .AddMap("Especialidade", agendamento => agendamento.Consulta.Especialidade)
+                .GenerateMappings()
                 ;
 
             var gridifyQueryable = _context.Agendamentos
+                .Include(p => p.Paciente)
+                .Include(p => p.Sala)
+                .Include(p => p.Consulta)
                 .Where(p => !p.IsDeleted)
                 .GridifyQueryable(request, mapper);
 

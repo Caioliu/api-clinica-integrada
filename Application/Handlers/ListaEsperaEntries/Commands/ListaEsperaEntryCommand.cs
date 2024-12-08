@@ -15,7 +15,6 @@ namespace Application.Handlers.ListaEsperaEntries.Commands
         public ListaStatus Status { get; set; }
         public Especialidade Especialidade { get; set; }
         public Prioridade Prioridade { get; set; }
-        [JsonIgnore]
         public Guid PacienteId { get; set; }
 
     }

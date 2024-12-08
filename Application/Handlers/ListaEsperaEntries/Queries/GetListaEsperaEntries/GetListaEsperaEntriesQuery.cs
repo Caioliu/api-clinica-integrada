@@ -24,10 +24,12 @@ namespace Application.Handlers.ListaEsperaEntries.Queries.GetListaEsperaEntries
 
             public Task<PaginatedList<ListaEsperaEntryDTO>> Handle(GetListaEsperaEntriesQuery request, CancellationToken cancellationToken) {
                 var mapper = new GridifyMapper<ListaEspera>()
+                    .AddMap("PacienteNome", listaEspera => listaEspera.Paciente.Nome)
                     .GenerateMappings();
 
                 var gridifyQueryable = _context.ListaEspera
                     .Where(p => !p.IsDeleted)
+                    .Include(p => p.Paciente)
                     .GridifyQueryable(request, mapper);
 
                 var query = gridifyQueryable.Query;
