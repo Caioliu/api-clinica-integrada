@@ -51,11 +51,6 @@ namespace Application.Handlers.Pacientes.Commands.Create
                     ListaEsperaId = null
                 };
 
-                var result = new CreatePacienteDTO {
-                    PacienteId = entity.Id,
-                    ListaEsperaId = null
-                };
-
                 await _context.Pacientes.AddAsync(entity, cancellationToken);
 
                 if (request.ListaEspera != null) {
