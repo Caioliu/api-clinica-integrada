@@ -7,6 +7,7 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Especialidade Especialidade { get; set; }
+        public string Nome { get; set; }
 
         //Relacionamentos
         public IList<EquipeProfissional> Profissionais { get; set; }

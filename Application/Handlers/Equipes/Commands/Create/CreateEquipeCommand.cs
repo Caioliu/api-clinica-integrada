@@ -14,6 +14,7 @@ namespace Application.Handlers.Equipes.Commands.Create
 {
     public class CreateEquipeCommand : IRequest<ServiceResult>
     {
+        public string Nome { get; set; }
         public Especialidade Especialidade { get; set; }
         public IList<Guid> Estagiarios { get; set; }
         public IList<Guid> Professores { get; set; }
@@ -40,6 +41,7 @@ namespace Application.Handlers.Equipes.Commands.Create
         public async Task<ServiceResult> Handle(CreateEquipeCommand request, CancellationToken cancellationToken) {
             var equipe = new Equipe {
                 Id = Guid.NewGuid(),
+                Nome = request.Nome,
                 Especialidade = request.Especialidade, // Defina a especialidade conforme necessário
                 Profissionais = new List<EquipeProfissional>()
             };

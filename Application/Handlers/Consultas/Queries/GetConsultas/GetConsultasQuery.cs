@@ -34,6 +34,8 @@ namespace Application.Handlers.Consultas.Queries.GetConsultas
 
             var gridifyQueryable = _context.Consultas
                 .Where(p => !p.IsDeleted)
+                .Include(p => p.Agendamento)
+                    .ThenInclude(p => p.Paciente)
                 .GridifyQueryable(request, mapper);
 
             var query = gridifyQueryable.Query;

@@ -30,6 +30,9 @@ namespace Application.Handlers.Agendamentos.Queries.GetAgendamentoById
 
             try {
                 var entity = await _context.Agendamentos
+                                            .Include(p => p.Paciente)
+                                            .Include(p => p.Sala)
+                                            .Include(p => p.Consulta)
                                            .Where(p => !p.IsDeleted) // Adiciona a condição para IsDeleted
                                            .FirstOrDefaultAsync(p => p.Id == request.Id);
 

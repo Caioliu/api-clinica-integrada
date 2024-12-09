@@ -29,6 +29,8 @@ namespace Application.Handlers.Consultas.Queries.GetConsultaById
             try {
                 var entity = await _context.Consultas
                     .Where(p => !p.IsDeleted)
+                    .Include(p => p.Agendamento)
+                        .ThenInclude(p => p.Paciente)
                     .FirstOrDefaultAsync(p => p.Id == request.Id);
 
                 if (entity == null) {

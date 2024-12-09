@@ -7,6 +7,7 @@ namespace Application.DTOs
     public class ConsultaDTO : IMapFrom<Consulta>
     {
         public Guid Id { get; set; }
+        public string Nome { get; set; }
         public string Observacao { get; set; }
         public DateTime? DataHoraInicio { get; set; }
         public DateTime? DataHoraFim { get; set; }
@@ -18,6 +19,7 @@ namespace Application.DTOs
         public void Mapping(MappingProfile profile) {
             profile.CreateMap<Consulta, ConsultaDTO>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
+                .ForMember(d => d.Nome, opt => opt.MapFrom(s => s.Agendamento.Paciente.Nome))
                 .ForMember(d => d.Observacao, opt => opt.MapFrom(s => s.Observacao))
                 .ForMember(d => d.DataHoraInicio, opt => opt.MapFrom(s => s.DataHoraInicio))
                 .ForMember(d => d.DataHoraFim, opt => opt.MapFrom(s => s.DataHoraFim))
