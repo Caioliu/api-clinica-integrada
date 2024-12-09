@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+using Application.DTOs;
 using Application.Handlers.Agendamentos.Queries.GetAgendamentoById;
 using Application.Handlers.Consultas.Queries.GetConsultaById;
 using Application.Handlers.Pacientes.Commands.Create;
