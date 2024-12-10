@@ -37,7 +37,7 @@ namespace Infrastructure
             services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<IGeracaoUsuariosPerfisIniciais, GeracaoUsuariosPerfisIniciais>();
+            services.AddScoped<IDbContextSeed, DbContextSeed>();
             services.AddScoped<IDateTime, DateTimeService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());

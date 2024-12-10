@@ -105,7 +105,7 @@ namespace WebApi
               .AllowCredentials()); // allow credentials
 
             app.UseHttpsRedirection();
-            GeraUsuariosEPerfis(app);
+            SeedDatabaseAsync(app);
             app.UseRouting();
             app.UseCors("AllowAnyOrigin");
             app.UseAuthentication();
@@ -115,12 +115,14 @@ namespace WebApi
             });
         }
 
-        void GeraUsuariosEPerfis(IApplicationBuilder app) {
+        async void SeedDatabaseAsync(IApplicationBuilder app) {
             using (var serviceScope = app.ApplicationServices.CreateScope()) {
-                var geracaoUsuariosPerfisIniciais = serviceScope.ServiceProvider.GetService<IGeracaoUsuariosPerfisIniciais>();
+                var geracaoUsuariosPerfisIniciais = serviceScope.ServiceProvider.GetService<IDbContextSeed>();
 
                 geracaoUsuariosPerfisIniciais.GerarPerfis();
                 geracaoUsuariosPerfisIniciais.GerarUsuarios();
+                await geracaoUsuariosPerfisIniciais.GerarProfissionaisEEquipesAsync();
+                await geracaoUsuariosPerfisIniciais.GerarSalasAsync();
             }
         }
     }

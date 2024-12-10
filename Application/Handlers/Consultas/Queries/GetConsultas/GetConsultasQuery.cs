@@ -30,6 +30,7 @@ namespace Application.Handlers.Consultas.Queries.GetConsultas
 
             var mapper = new GridifyMapper<Consulta>()
                 .AddMap("PacienteNome", c => c.Agendamento.Paciente.Nome)
+                .AddMap("PacienteId", c => c.Agendamento.PacienteId)
                 .GenerateMappings();
 
             var gridifyQueryable = _context.Consultas

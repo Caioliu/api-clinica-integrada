@@ -13,6 +13,7 @@ namespace Application.DTOs
         public DateTime? DataHoraFim { get; set; }
         public string Especialidade { get; set; }
         public string Status { get; set; }
+        public AgendamentoTipo Tipo { get; set; }
         public Guid AgendamentoId { get; set; }
         public Guid EquipeId { get; set; }
 
@@ -20,6 +21,7 @@ namespace Application.DTOs
             profile.CreateMap<Consulta, ConsultaDTO>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id))
                 .ForMember(d => d.Nome, opt => opt.MapFrom(s => s.Agendamento.Paciente.Nome))
+                .ForMember(d => d.Tipo, opt => opt.MapFrom(s => s.Agendamento.Tipo))
                 .ForMember(d => d.Observacao, opt => opt.MapFrom(s => s.Observacao))
                 .ForMember(d => d.DataHoraInicio, opt => opt.MapFrom(s => s.DataHoraInicio))
                 .ForMember(d => d.DataHoraFim, opt => opt.MapFrom(s => s.DataHoraFim))

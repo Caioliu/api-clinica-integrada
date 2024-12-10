@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Identity.Services.Interfaces
 {
-    public interface IGeracaoUsuariosPerfisIniciais
+    public interface IDbContextSeed
     {
         void GerarUsuarios();
         void GerarPerfis();
+        public Task GerarProfissionaisEEquipesAsync();
+        public Task GerarSalasAsync();
     }
 }
