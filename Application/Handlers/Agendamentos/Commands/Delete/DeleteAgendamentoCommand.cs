@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Models;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Agendamentos.Commands.Delete
@@ -25,10 +26,18 @@ namespace Application.Handlers.Agendamentos.Commands.Delete
             try {
                 var entity = await _context.Agendamentos
                     .Where(p => !p.IsDeleted)
+                    .Include(p => p.Consulta)
                     .FirstOrDefaultAsync(p => p.Id == request.Id);
 
                 if (entity == null) {
                     throw new Exception("Agendamento não encontrado");
+                }
+
+                // caso a consulta possua status agendada, também deve ser marcada para exclusão
+                if (entity.Consulta != null && entity.Consulta.Status == ConsultaStatus.Agendada) {
+                    entity.Consulta.ExcludedAt = _dateTime.Now;
+                    entity.Consulta.IsDeleted = true;
+                    _context.Consultas.Update(entity.Consulta);
                 }
 
                 entity.ExcludedAt = _dateTime.Now;

@@ -56,15 +56,28 @@ namespace Infrastructure.Identity.Services
         public async Task GerarSalasAsync() {
             Especialidade[] especialidades = { Especialidade.Psicologia, Especialidade.Fisioterapia, Especialidade.Odontologia, Especialidade.Nutricao };
 
-            // Adicionar salas somente se ainda não existirem
             foreach (var especialidade in especialidades) {
-                if (!_context.Salas.Any(s => s.Especialidade == especialidade)) {
-                    var sala = new Sala {
-                        Especialidade = especialidade,
-                        Nome = "Sala de " + especialidade.ToString(),
-                        IsDisponivel = true // Inicia como disponível
-                    };
-                    _context.Salas.Add(sala);
+                // Verificar se há pelo menos duas salas para a especialidade
+                var salasExistentes = _context.Salas.Where(s => s.Especialidade == especialidade).Count();
+                if (salasExistentes < 2) {
+                    // Criar as salas que faltam
+                    if (!_context.Salas.Any(s => s.Nome == $"Sala de {especialidade} 1")) {
+                        var sala1 = new Sala {
+                            Especialidade = especialidade,
+                            Nome = $"Sala de {especialidade} 1",
+                            IsDisponivel = true
+                        };
+                        _context.Salas.Add(sala1);
+                    }
+
+                    if (!_context.Salas.Any(s => s.Nome == $"Sala de {especialidade} 2")) {
+                        var sala2 = new Sala {
+                            Especialidade = especialidade,
+                            Nome = $"Sala de {especialidade} 2",
+                            IsDisponivel = true
+                        };
+                        _context.Salas.Add(sala2);
+                    }
                 }
             }
 
