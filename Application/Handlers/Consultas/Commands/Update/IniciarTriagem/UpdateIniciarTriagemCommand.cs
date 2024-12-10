@@ -3,6 +3,7 @@ using Application.Models;
 using Domain.Entities;
 using Domain.Enums;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Consultas.Commands.Update.IniciarTriagem
 {
@@ -28,6 +29,12 @@ namespace Application.Handlers.Consultas.Commands.Update.IniciarTriagem
                 var agendamento = await _context.Agendamentos.FindAsync(consulta.AgendamentoId);
                 agendamento.Status = AgendamentoStatus.Concluido;
                 consulta.Status = ConsultaStatus.Triagem;
+
+                //Bloquear Sala
+                var salaConsulta = await _context.Salas.FirstOrDefaultAsync(x => x.Id == consulta.Agendamento.SalaId);
+                if (salaConsulta != null) {
+                    salaConsulta.IsDisponivel = false;
+                }
 
                 await _context.SaveChangesAsync(cancellationToken);
                 return ServiceResult.Success("Triagem Iniciada");

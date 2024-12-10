@@ -13,6 +13,7 @@ namespace Application.DTOs
         public DateTime DataHoraFim { get; set; }
         public string Tipo { get; set; }
         public string Status { get; set; }
+        public string Especialidade { get; set; }
         public string StatusConsulta { get; set; }
         public Guid PacienteId { get; set; }
         public string Sala { get; set; }
@@ -27,6 +28,7 @@ namespace Application.DTOs
                 .ForMember(d => d.Tipo, opt => opt.MapFrom(s => s.Tipo))
                 .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status))
                 .ForMember(d => d.StatusConsulta, opt => opt.MapFrom(s => s.Consulta.Status))
+                .ForMember(d => d.Especialidade, opt => opt.MapFrom(s => s.Consulta.Especialidade))
                 .ForMember(d => d.PacienteId, opt => opt.MapFrom(s => s.PacienteId))
                 .ForMember(d => d.Nome, opt => opt.MapFrom(s => s.Paciente.Nome))
                 .ForMember(d => d.Sala, opt => opt.MapFrom(s => s.Sala.Nome))

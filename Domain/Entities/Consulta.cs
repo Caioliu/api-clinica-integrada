@@ -7,6 +7,8 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Observacao { get; set; }
+        // Adicionar data hora inicio triagem
+        // Adicionar data hora fim triagem
         public DateTime? DataHoraInicio { get; set; }
         public DateTime? DataHoraFim { get; set; }
         public Especialidade Especialidade { get; set; }
